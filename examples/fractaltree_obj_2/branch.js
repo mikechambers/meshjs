@@ -1,21 +1,48 @@
 import Color from "../../lib/color.js";
 import { random } from "../../lib/math.js";
 import Vector from "../../lib/vector.js";
+import { pointOnCircle } from "../../lib/utils.js";
 
 export default class Branch {
   constructor(start, end) {
     this._start = start;
     this._end = end;
 
-    this._hasChildren = false;
+    this._children = [];
 
     this._leafColor = Color.WHITE;
     this._leafRadius = 6;
     this._nodeRadius = 3;
     this._branchColor = Color.WHITE;
+
+    this._options = undefined;
   }
+
+  set start(position) {
+    this._start = position;
+  }
+
+  get start() {
+    return this._start;
+  }
+
+  set options(options) {
+    this._leafColor = options.leafColor;
+    this._leafRadius = options.leafRadius;
+    this._nodeRadius = options.nodeRadius;
+    this._branchColor = options.branchColor;
+
+    this._options = options;
+
+    if (this.hasChildren) {
+      for (let b of this._children) {
+        b.options = options;
+      }
+    }
+  }
+
   get hasChildren() {
-    return this._hasChildren;
+    return this._children != undefined && this._children.length > 0;
   }
 
   set leafColor(color) {
@@ -34,7 +61,22 @@ export default class Branch {
     this._branchColor = color;
   }
 
+  jitter() {
+    this._end.add(Vector.getRandom(1));
+
+    for (let b of this._children) {
+      b.start = this._end;
+      b.jitter();
+    }
+  }
+
   draw(ctx) {
+    if (this.hasChildren) {
+      for (let b of this._children) {
+        b.draw(ctx);
+      }
+    }
+
     ctx.strokeStyle = this._branchColor.toRGBA();
     ctx.lineWidth = 1.0;
     ctx.beginPath();
@@ -42,12 +84,12 @@ export default class Branch {
     ctx.lineTo(this._end.x, this._end.y);
     ctx.stroke();
 
-    ctx.fillStyle = this._hasChildren
+    ctx.fillStyle = this.hasChildren
       ? Color.WHITE.toRGBA()
       : this._leafColor.toRGBA();
     ctx.moveTo(this._end.x, this._end.y);
 
-    let r = this._hasChildren ? this._nodeRadius : this._leafRadius;
+    let r = this.hasChildren ? this._nodeRadius : this._leafRadius;
 
     ctx.arc(this._end.x, this._end.y, r, 0, Math.PI * 2);
     ctx.fill();
@@ -59,13 +101,20 @@ export default class Branch {
   }
 
   spawn() {
-    let b1 = this.createChild(random(0, Math.PI / 4));
-    b1.leafColor = this._leafColor;
-    let b2 = this.createChild(-random(0, Math.PI / 4));
-    b2.leafColor = this._leafColor;
+    if (this.hasChildren) {
+      for (let b of this._children) {
+        b.spawn();
+      }
+      return;
+    }
 
-    this._hasChildren = true;
-    return [b1, b2];
+    //let heading = Vector.subtract(this._end, this._start).heading;
+
+    let b1 = this.createChild(random(0, Math.PI / 4));
+    let b2 = this.createChild(-random(0, Math.PI / 4));
+
+    this._children.push(b1);
+    this._children.push(b2);
   }
 
   createChild(angle) {
@@ -75,6 +124,7 @@ export default class Branch {
 
     let end = Vector.add(this._end, dir);
     let b = new Branch(this._end, end);
+    b.options = this._options;
 
     return b;
   }

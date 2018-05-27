@@ -73,7 +73,7 @@ let ctx;
 let bounds;
 
 let circle;
-let angle = Math.PI / 8;
+let angle = 3 * Math.PI / 2;
 
 let mousePosition = new Vector();
 
@@ -82,7 +82,7 @@ let gradient;
 
 /*************** CODE ******************/
 
-let tree;
+let root;
 let leafColor;
 const init = function(canvas) {
   ctx = canvas.context;
@@ -95,22 +95,28 @@ const init = function(canvas) {
   );
   gradient.create();
 
-  tree = [];
-
   colorPallete = randomColorPallete();
   config.PALLETTE_NAME = colorPallete.name;
 
-  let root = new Branch(
+  root = new Branch(
     new Vector(bounds.center.x, bounds.height),
     new Vector(bounds.center.x, bounds.height - bounds.height / 5)
   );
 
-  initBranch(root);
+  let c = colorPallete.getRandomColor();
+  c.alpha = config.LEAF_OPACITY;
 
-  tree.push(root);
+  let options = {
+    leafColor: c,
+    leafRadius: config.LEAF_RADIUS,
+    nodeRadius: config.NODE_RADIUS,
+    branchColor: Color.fromHex(config.BRANCH_COLOR)
+  };
 
-  for (let i = 0; i < 10; i++) {
-    spawnBranches();
+  root.options = options;
+
+  for (let i = 0; i < 8; i++) {
+    root.spawn();
   }
 };
 
@@ -123,40 +129,13 @@ const draw = function(canvas, frameCount) {
     bounds.height
   );
 
-  for (let b of tree) {
-    b.draw(ctx);
-  }
+  root.jitter();
+  root.draw(ctx);
 };
 
-const initBranch = function(b) {
-  let c = colorPallete.getRandomColor();
-  c.alpha = config.LEAF_OPACITY;
-  b.leafColor = c;
-  b.leafRadius = config.LEAF_RADIUS;
-  b.nodeRadius = config.NODE_RADIUS;
-  b.branchColor = Color.fromHex(config.BRANCH_COLOR);
-};
-
-const spawnBranches = function() {
-  let len = tree.length;
-  for (let i = 0; i < len; i++) {
-    let b = tree[i];
-
-    if (b.hasChildren) {
-      continue;
-    }
-
-    let children = tree[i].spawn();
-
-    for (let b of children) {
-      initBranch(b);
-      tree.push(b);
-    }
-  }
-};
-
-const click = function(event, vector) {
-  spawnBranches();
+const click = function(event) {
+  console.log(event);
+  root.spawn();
 };
 
 window.onload = function() {
