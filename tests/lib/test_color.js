@@ -227,17 +227,17 @@ describe("Color.fromHex", () => {
   });
 });
 
-describe("getRandom", () => {
-  it("Color.getRandom should return a valid color instance", () => {
-    let c = Color.getRandom();
+describe("createRandom", () => {
+  it("Color.createRandom should return a valid color instance", () => {
+    let c = Color.createRandom();
     expect(c instanceof Color).to.equal(true);
 
-    let c2 = Color.getRandom(0.8);
+    let c2 = Color.createRandom(0.8);
     expect(c2 instanceof Color).to.equal(true);
     expect(c2.alpha === 0.8).to.equal(true);
 
     for (let i = 0; i < 2000; i++) {
-      let r = Color.getRandom();
+      let r = Color.createRandom();
 
       expect(r.red <= 255).to.equal(true);
       expect(r.green <= 255).to.equal(true);
@@ -250,7 +250,7 @@ describe("getRandom", () => {
       expect(r.alpha <= 1.0).to.equal(true);
       expect(r.alpha >= 0.0).to.equal(true);
 
-      let r2 = Color.getRandom(true);
+      let r2 = Color.createRandom(true);
 
       expect(r2.red <= 255).to.equal(true);
       expect(r2.green <= 255).to.equal(true);
