@@ -46,4 +46,4 @@ prepend private functions and variables with underscore
 
 if utility functions exclusively work on an instance they cab be part of the class
 
-methods that return random instances should get named getINSTANCE_NAME, and be attached as static methods on the classes
+methods that return random instances should be named createRandom, and be attached as static methods on the classes
