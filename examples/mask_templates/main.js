@@ -7,7 +7,7 @@
 	Copyright Mike Chambers 2018
 **/
 
-import mesh from "../../lib/mesh.js";
+import meshjs from "../../lib/meshjs.js";
 import Rectangle from "../../lib/rectangle.js";
 import { loadPixelDataFromPathWithBounds } from "../../lib/pixeldata.js";
 
@@ -83,7 +83,7 @@ window.onload = function() {
     config.TEMPLATE,
     function(pd, img) {
       _pd = pd;
-      mesh.init(config, init, draw);
+      meshjs.init(config, init, draw);
     },
     new Rectangle(0, 0, config.RENDER_WIDTH, config.RENDER_HEIGHT)
   );

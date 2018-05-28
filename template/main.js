@@ -7,7 +7,7 @@
 	Copyright Mike Chambers 2018
 **/
 
-import mesh from "../lib/mesh.js";
+import meshjs from "../lib/meshjs.js";
 
 /************ CONFIG **************/
 
@@ -74,5 +74,5 @@ const init = function(canvas) {
 const draw = function(canvas, frameCount) {};
 
 window.onload = function() {
-  mesh.init(config, init, draw);
+  meshjs.init(config, init, draw);
 };

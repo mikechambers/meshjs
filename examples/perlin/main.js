@@ -7,7 +7,7 @@
 	Copyright Mike Chambers 2018
 **/
 
-import mesh from "../../lib/mesh.js";
+import meshjs from "../../lib/meshjs.js";
 import noise from "../../lib/noise.js";
 import Color from "../../lib/color.js";
 
@@ -108,5 +108,5 @@ const draw = function() {
 };
 
 window.onload = function() {
-  mesh.init(config, init, draw);
+  meshjs.init(config, init, draw);
 };

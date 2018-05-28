@@ -7,7 +7,7 @@
 	Copyright Mike Chambers 2018
 **/
 
-import mesh from "../../lib/mesh.js";
+import meshjs from "../../lib/meshjs.js";
 import { downloadJSON } from "../../lib/datautils.js";
 import Color from "../../lib/color.js";
 
@@ -105,7 +105,7 @@ const onJsonLoad = function(request) {
 };
 
 window.onload = function() {
-  mesh.init(config, init, draw);
+  meshjs.init(config, init, draw);
 
   var request = new XMLHttpRequest();
 

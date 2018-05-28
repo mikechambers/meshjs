@@ -7,7 +7,7 @@
 	Copyright Mike Chambers 2018
 **/
 
-import mesh from "../../lib/mesh.js";
+import meshjs from "../../lib/meshjs.js";
 import Vector from "../../lib/vector.js";
 import Circle from "../../lib/circle.js";
 import Color from "../../lib/color.js";
@@ -131,6 +131,6 @@ const mousemove = function(event) {
 };
 
 window.onload = function() {
-  mesh.init(config, init, draw);
-  mesh.listen(mousemove);
+  meshjs.init(config, init, draw);
+  meshjs.listen(mousemove);
 };

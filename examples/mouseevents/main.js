@@ -7,7 +7,7 @@
 	Copyright Mike Chambers 2018
 **/
 
-import mesh from "../../lib/mesh.js";
+import meshjs from "../../lib/meshjs.js";
 import Circle from "../../lib/circle.js";
 import Color from "../../lib/color.js";
 
@@ -78,14 +78,14 @@ const draw = function(canvas, frameCount) {};
 let listenMouseMove = true;
 const click = function(event) {
   let position = event.position;
-  //mesh.listen(mouseClick, mouseUp, mouseDown, false);
+
   console.log("mouseClick", event, position);
 
   let c = new Circle(position, config.RADIUS);
   c.fillColor = new Color(255, 0, 0, 0.5);
   c.draw(ctx);
 
-  mesh.listen(mousemove, (listenMouseMove = !listenMouseMove));
+  meshjs.listen(mousemove, (listenMouseMove = !listenMouseMove));
 };
 
 const mouseup = function(event) {
@@ -116,6 +116,6 @@ const mousemove = function(event) {
 };
 
 window.onload = function() {
-  mesh.init(config, init, draw);
-  mesh.listen(click, mousemove, mousedown, mouseup);
+  meshjs.init(config, init, draw);
+  meshjs.listen(click, mousemove, mousedown, mouseup);
 };

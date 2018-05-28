@@ -7,7 +7,7 @@
 	Copyright Mike Chambers 2018
 **/
 
-import mesh from "../../lib/mesh.js";
+import meshjs from "../../lib/meshjs.js";
 import Vector from "../../lib/vector.js";
 import Color from "../../lib/color.js";
 import Gradient, {
@@ -127,5 +127,5 @@ const draw = function(canvas, frameCount) {
 };
 
 window.onload = function() {
-  mesh.init(config, init, draw);
+  meshjs.init(config, init, draw);
 };

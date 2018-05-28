@@ -7,7 +7,7 @@
 	Copyright Mike Chambers 2018
 **/
 
-import mesh from "../../lib/mesh.js";
+import meshjs from "../../lib/meshjs.js";
 import PCircle from "./pcircle.js";
 import { downloadSVG } from "../../lib/datautils.js";
 import * as utils from "../../lib/utils.js";
@@ -122,7 +122,7 @@ const init = function(canvas) {
   _completedCaptured = false;
   _doDraw = config.DRAW_BY_DEFAULT;
 
-  mesh.setPaused(false);
+  meshjs.setPaused(false);
 
   if (config.COLOR_SOURCE == colorSource.PALLETE) {
     pallete = colorPalleteFromName(config.PALLETE_NAME);
@@ -200,7 +200,7 @@ const draw = function(canvas, frameCount) {
 
   if (_completed & !_completedCaptured) {
     if (config.DOWNLOAD_PNG_ON_COMPLETE) {
-      mesh.downloadPng();
+      meshjs.downloadPng();
     }
 
     _completedCaptured = true;
@@ -235,7 +235,7 @@ const getColor = function(point) {
 const getRandomPoints = function(count) {
   if (pixels.length == 0) {
     console.log("render complete");
-    mesh.setPaused(true);
+    meshjs.setPaused(true);
     _doDraw = true;
     _completed = true;
     return [];
@@ -284,8 +284,8 @@ window.onload = function() {
     r = resolve;
   });
 
-  mesh.init(config, init, draw, p);
-  mesh.listen(keypress);
+  meshjs.init(config, init, draw, p);
+  meshjs.listen(keypress);
 
   loadPixelDataFromPathWithBounds(
     config.TEMPLATE,
@@ -293,6 +293,6 @@ window.onload = function() {
       originalPixels = pd.filter(Color.BLACK);
       r();
     },
-    mesh.canvas.bounds
+    meshjs.canvas.bounds
   );
 };

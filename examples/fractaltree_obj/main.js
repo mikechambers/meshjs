@@ -7,7 +7,7 @@
 	Copyright Mike Chambers 2018
 **/
 
-import mesh from "../../lib/mesh.js";
+import meshjs from "../../lib/meshjs.js";
 import Vector from "../../lib/vector.js";
 import Circle from "../../lib/circle.js";
 import Color from "../../lib/color.js";
@@ -168,6 +168,6 @@ const click = function(event, vector) {
 };
 
 window.onload = function() {
-  mesh.init(config, init, draw);
-  mesh.listen(click);
+  meshjs.init(config, init, draw);
+  meshjs.listen(click);
 };

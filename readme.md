@@ -1,4 +1,4 @@
-## mesh.js
+## meshjs.js
 
 My personal JavaScript / canvas creative coding framework.
 

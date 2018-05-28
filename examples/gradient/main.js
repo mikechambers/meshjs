@@ -8,7 +8,7 @@
 **/
 
 import Gradient, { gradientFromName } from "../../lib/gradient.js";
-import mesh from "../../lib/mesh.js";
+import meshjs from "../../lib/meshjs.js";
 
 /************ CONFIG **************/
 
@@ -104,5 +104,5 @@ const draw = function() {
 };
 
 window.onload = function() {
-  mesh.init(config, init, draw);
+  meshjs.init(config, init, draw);
 };
