@@ -25,6 +25,14 @@ const config = {
   RENDER_HEIGHT: 1080,
   RENDER_WIDTH: 1920,
 
+  //whether we proxy and capture canvas calls so we can spit out svg
+  //svg output currently not implimented
+  CAPTURE_SVG: false,
+
+  //whether to output debug information (currently just for)
+  //canvas rendering.
+  ENABLE_DEBUG: false,
+
   //Max dimension canvas will be display at on page
   //note, exact dimension will depend on RENDER_HEIGHT / width and
   //ratio to these properties.

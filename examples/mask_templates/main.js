@@ -22,6 +22,14 @@ const config = {
   //app name, used for saving files
   APP_NAME: window.location.pathname.replace(/\//gi, ""),
 
+  //whether we proxy and capture canvas calls so we can spit out svg
+  //svg output currently not implimented
+  CAPTURE_SVG: false,
+
+  //whether to output debug information (currently just for)
+  //canvas rendering.
+  ENABLE_DEBUG: false,
+
   //Dimensions that canvas will be rendered at
   RENDER_HEIGHT: 640,
   RENDER_WIDTH: 1080,

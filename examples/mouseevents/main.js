@@ -22,6 +22,14 @@ const config = {
   //app name, used for saving files
   APP_NAME: window.location.pathname.replace(/\//gi, ""),
 
+  //whether we proxy and capture canvas calls so we can spit out svg
+  //svg output currently not implimented
+  CAPTURE_SVG: false,
+
+  //whether to output debug information (currently just for)
+  //canvas rendering.
+  ENABLE_DEBUG: false,
+
   //Dimensions that canvas will be rendered at
   RENDER_HEIGHT: 1080,
   RENDER_WIDTH: 1080,
@@ -68,7 +76,8 @@ const init = function(canvas) {
 const draw = function(canvas, frameCount) {};
 
 let listenMouseMove = true;
-const click = function(event, position) {
+const click = function(event) {
+  let position = event.position;
   //mesh.listen(mouseClick, mouseUp, mouseDown, false);
   console.log("mouseClick", event, position);
 
@@ -79,7 +88,8 @@ const click = function(event, position) {
   mesh.listen(mousemove, (listenMouseMove = !listenMouseMove));
 };
 
-const mouseup = function(event, position) {
+const mouseup = function(event) {
+  let position = event.position;
   console.log("mouseUp", event, position);
 
   let c = new Circle(position, config.RADIUS * 2);
@@ -87,7 +97,8 @@ const mouseup = function(event, position) {
   c.draw(ctx);
 };
 
-const mousedown = function(event, position) {
+const mousedown = function(event) {
+  let position = event.position;
   console.log("mouseDown", event, position);
 
   let c = new Circle(position, config.RADIUS * 2);
@@ -95,7 +106,8 @@ const mousedown = function(event, position) {
   c.draw(ctx);
 };
 
-const mousemove = function(event, position) {
+const mousemove = function(event) {
+  let position = event.position;
   console.log("mouseMove", event, position);
 
   let c = new Circle(position, config.RADIUS);
@@ -105,11 +117,5 @@ const mousemove = function(event, position) {
 
 window.onload = function() {
   mesh.init(config, init, draw);
-  mesh.listen(click);
-
-  //three options
-  //attach all function  to mesh (wordy, might cause issues in future)
-  //pass in array to init. clunky, cant add afterwars
-  //pass in via mesh.listen , clean and explicit, requires specif naming
-  //todo: make draw, init funcions an array
+  mesh.listen(click, mousemove, mousedown, mouseup);
 };

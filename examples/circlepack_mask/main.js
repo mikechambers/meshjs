@@ -37,6 +37,14 @@ let config = {
   //app name, used for saving files
   APP_NAME: window.location.pathname.replace(/\//gi, ""),
 
+  //whether we proxy and capture canvas calls so we can spit out svg
+  //svg output currently not implimented
+  CAPTURE_SVG: false,
+
+  //whether to output debug information (currently just for)
+  //canvas rendering.
+  ENABLE_DEBUG: false,
+
   //Dimensions that canvas will be rendered at
   RENDER_HEIGHT: 1080, //1600,
   RENDER_WIDTH: 1080, //2560,
@@ -261,7 +269,7 @@ const createSVG = function() {
   return svg;
 };
 
-const onKeyUp = function(event) {
+const keypress = function(event) {
   if (event.key === "s") {
     let svg = createSVG();
     downloadSVG(svg, config.APP_NAME);
@@ -277,6 +285,7 @@ window.onload = function() {
   });
 
   mesh.init(config, init, draw, p);
+  mesh.listen(keypress);
 
   loadPixelDataFromPathWithBounds(
     config.TEMPLATE,
@@ -286,6 +295,4 @@ window.onload = function() {
     },
     mesh.canvas.bounds
   );
-
-  window.addEventListener("keyup", onKeyUp);
 };
