@@ -250,7 +250,7 @@ const createSVG = function() {
     svg +
     `<rect x="0" y="0" width="${config.RENDER_WIDTH}"
 				height="${config.RENDER_HEIGHT}"
-				fill="${config.BACKGROUND_COLOR}"/>\n`;
+				fill="${config.CANVAS_BACKGROUND_COLOR}"/>\n`;
 
   for (let c of circles) {
     svg = svg + c.toSVG() + "\n";
