@@ -1,6 +1,6 @@
 {
   "name": "meshjs",
-  "version": "1.0.0",
+  "version": "0.60.0",
   "description": "My personal JavaScript / canvas creative coding framework.",
   "main": "prettier.config.js",
   "directories": {
