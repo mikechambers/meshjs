@@ -20,7 +20,7 @@ const config = {
   PARENT_ID: "canvas_container",
 
   //app name, used for saving files
-  APP_NAME: window.location.pathname.replace(/\//gi, ""),
+  PROJECT_NAME: meshjs.getProjectName(),
 
   //Dimensions that canvas will be rendered at
   RENDER_HEIGHT: 1080,
@@ -101,7 +101,7 @@ const onJsonLoad = function(request) {
     out.push({ name: title, colors: tmp });
   }
 
-  downloadJSON(out, config.APP_NAME);
+  downloadJSON(out, config.PROJECT_NAME);
 };
 
 window.onload = function() {

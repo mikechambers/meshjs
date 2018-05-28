@@ -18,7 +18,7 @@ const config = {
   PARENT_ID: "canvas_container",
 
   //app name, used for saving files
-  APP_NAME: window.location.pathname.replace(/\//gi, ""),
+  PROJECT_NAME: meshjs.getProjectName(),
 
   //whether we proxy and capture canvas calls so we can spit out svg
   //svg output currently not implimented

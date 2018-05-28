@@ -32,7 +32,7 @@ let config = {
   PARENT_ID: "canvas_container",
 
   //app name, used for saving files
-  APP_NAME: window.location.pathname.replace(/\//gi, ""),
+  PROJECT_NAME: meshjs.getProjectName(),
 
   //whether we proxy and capture canvas calls so we can spit out svg
   //svg output currently not implimented
@@ -328,7 +328,7 @@ const createSVG = function() {
 const onKeyUp = function(event) {
   if (event.key === "s") {
     let svg = createSVG();
-    downloadSVG(svg, config.APP_NAME);
+    downloadSVG(svg, config.PROJECT_NAME);
   } else if (event.key === "d") {
     _doDraw = !_doDraw;
   }

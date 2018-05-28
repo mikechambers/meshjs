@@ -19,7 +19,7 @@ const config = {
   PARENT_ID: "canvas_container",
 
   //app name, used for saving files
-  APP_NAME: window.location.pathname.replace(/\//gi, ""),
+  PROJECT_NAME: meshjs.getProjectName(),
 
   //Dimensions that canvas will be rendered at
   RENDER_HEIGHT: 1080,
