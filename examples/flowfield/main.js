@@ -7,7 +7,7 @@
 	Copyright Mike Chambers 2018
 **/
 
-import meshjs from "../../lib/meshjs.js";
+import meshjs from "../../lib/mesh.js";
 import Vector from "../../lib/vector.js";
 import Color from "../../lib/color.js";
 import Particle from "./particle.js";

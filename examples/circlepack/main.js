@@ -7,7 +7,7 @@
 	Copyright Mike Chambers 2018
 **/
 
-import meshjs from "../../lib/meshjs.js";
+import meshjs from "../../lib/mesh.js";
 import PCircle from "./pcircle.js";
 import { downloadSVG } from "../../lib/datautils.js";
 import * as utils from "../../lib/utils.js";

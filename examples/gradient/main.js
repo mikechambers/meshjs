@@ -8,7 +8,7 @@
 **/
 
 import Gradient, { gradientFromName } from "../../lib/gradient.js";
-import meshjs from "../../lib/meshjs.js";
+import meshjs from "../../lib/mesh.js";
 
 /************ CONFIG **************/
 
