@@ -47,3 +47,7 @@ prepend private functions and variables with underscore
 if utility functions exclusively work on an instance they cab be part of the class
 
 methods that return random instances should be named createRandom, and be attached as static methods on the classes
+
+draw methods explicitly take and draw to a canvas context instance. shuld not use draw otherwise (use render or create)
+
+never cache pixel data by default
