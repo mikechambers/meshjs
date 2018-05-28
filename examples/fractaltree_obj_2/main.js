@@ -134,7 +134,6 @@ const draw = function(canvas, frameCount) {
 };
 
 const click = function(event) {
-  console.log(event);
   root.spawn();
 };
 

@@ -62,7 +62,7 @@ export default class Branch {
   }
 
   jitter() {
-    this._end.add(Vector.getRandom(1));
+    this._end.add(Vector.createRandom(1));
 
     for (let b of this._children) {
       b.start = this._end;
