@@ -44,7 +44,7 @@ const config = {
   BACKGROUND_COLOR: "#EEEEEE",
 
   //background color for display and offscreen canvas
-  CANVAS_BACKGROUND_COLOR: "#FFFFFF",
+  CANVAS_BACKGROUND_COLOR: "#FAFAFA",
 
   //whether a single frame is rendered, or draw is called based on FPS setting
   ANIMATE: false,

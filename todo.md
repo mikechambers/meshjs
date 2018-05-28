@@ -11,6 +11,7 @@
 * With new context proxy we can do some optimizations when redrawing. specifically, we may be able to check whether there have been any new commands since the last render, and if not, skip redrawing the screen
 * We can also do things like save a set of commands and play them back in the future. basically you could add forward / rewind
   ## SVG capture
+  * move  APP_NAME window.location.pathname.replace(/\//gi, "") to meshjs api
 
   Proxy calls to context, by passing and drawing to our own instance. We would probably need to mirror each specific call, but we could then store the call on the actual canvas instance like so:
 
