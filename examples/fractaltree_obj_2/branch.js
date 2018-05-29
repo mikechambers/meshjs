@@ -1,7 +1,7 @@
 import Color from "../../lib/color.js";
 import { random } from "../../lib/math.js";
 import Vector from "../../lib/vector.js";
-import { pointOnCircle } from "../../lib/utils.js";
+import { pointOnLine } from "../../lib/utils.js";
 
 export default class Branch {
   constructor(start, end) {
@@ -79,18 +79,24 @@ export default class Branch {
 
     ctx.strokeStyle = this._branchColor.toRGBA();
     ctx.lineWidth = 1.0;
+
+    let r = this.hasChildren ? this._nodeRadius : this._leafRadius;
+    let lineDestination = this._end;
+
+    if (!this.hasChildren) {
+      lineDestination = pointOnLine(this._end, this._start, r);
+    }
+
     ctx.beginPath();
     ctx.moveTo(this._start.x, this._start.y);
-    ctx.lineTo(this._end.x, this._end.y);
+    ctx.lineTo(lineDestination.x, lineDestination.y);
     ctx.stroke();
 
     ctx.fillStyle = this.hasChildren
       ? Color.WHITE.toRGBA()
       : this._leafColor.toRGBA();
-    ctx.moveTo(this._end.x, this._end.y);
 
-    let r = this.hasChildren ? this._nodeRadius : this._leafRadius;
-
+    ctx.beginPath();
     ctx.arc(this._end.x, this._end.y, r, 0, Math.PI * 2);
     ctx.fill();
     ctx.stroke();
