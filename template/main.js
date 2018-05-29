@@ -57,7 +57,17 @@ const config = {
   RECORD_VIDEO: false,
 
   //whether canvas should be cleared prior to each call to draw
-  CLEAR_CANVAS: false
+  CLEAR_CANVAS: false,
+
+  /*
+    Custom keyboard commands for project. These will be printed in the console
+    at start. Commands should be in able format like so:
+    KEY_COMMANDS: {
+      g: "Add nodes",
+      b: "Cycle through colors"
+    },
+  */
+  KEY_COMMANDS: {}
 
   /*********** APP Specific Settings ************/
 };
