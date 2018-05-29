@@ -75,7 +75,7 @@ const config = {
 
   LEAF_COLOR: "#00FF00",
   LEAF_RADIUS: 8,
-  NODE_RADIUS: 3,
+  NODE_RADIUS: 2,
   LEAF_OPACITY: 0.9,
   BRANCH_COLOR: "#333333", //"#EEEEEE",
   GRADIENT_NAME: "Bora Bora",

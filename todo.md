@@ -1,16 +1,25 @@
 ### todo
 
+* Do custom implimentation of Gradient (maybe that maps to SVG
+* Think about SVG support (using the canvas api)
+* Motion classes
+* Need to look at pointOnLine (try to figure out why we have to reverse angle)
+
+
 * Expand SVG export support
   * rectangle
   * circle
   * line (create)
 * add line object
 * add draw method to Gradient
+* clean up SVG stuff
 * more robust SVG capture
   * perhaps just proxy the context object and pass that around. then capture commands with a setting to capture SVG. clear when we clear screen. could initially just implement some calls and proxy the others through.
 * With new context proxy we can do some optimizations when redrawing. specifically, we may be able to check whether there have been any new commands since the last render, and if not, skip redrawing the screen
 * We can also do things like save a set of commands and play them back in the future. basically you could add forward / rewind
 * add shortcut to open generated files in new tab instead of downloading
+* what should we name apis we add onto canvas?
+  * draw, create, add, render
 
 
 
@@ -18,6 +27,9 @@
   ## SVG capture
   * move  PROJECT_NAME meshjs.getProjectName() to meshjs api
   * pass in context to draw, not canvas
+
+  look at:
+  https://github.com/gliffy/canvas2svg
 
   Proxy calls to context, by passing and drawing to our own instance. We would probably need to mirror each specific call, but we could then store the call on the actual canvas instance like so:
 
