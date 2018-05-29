@@ -12,6 +12,7 @@
 * We can also do things like save a set of commands and play them back in the future. basically you could add forward / rewind
   ## SVG capture
   * move  PROJECT_NAME meshjs.getProjectName() to meshjs api
+  * pass in context to draw, not canvas
 
   Proxy calls to context, by passing and drawing to our own instance. We would probably need to mirror each specific call, but we could then store the call on the actual canvas instance like so:
 
