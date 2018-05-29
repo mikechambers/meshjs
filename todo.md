@@ -10,6 +10,11 @@
   * perhaps just proxy the context object and pass that around. then capture commands with a setting to capture SVG. clear when we clear screen. could initially just implement some calls and proxy the others through.
 * With new context proxy we can do some optimizations when redrawing. specifically, we may be able to check whether there have been any new commands since the last render, and if not, skip redrawing the screen
 * We can also do things like save a set of commands and play them back in the future. basically you could add forward / rewind
+* add shortcut to open generated files in new tab instead of downloading
+
+
+
+
   ## SVG capture
   * move  PROJECT_NAME meshjs.getProjectName() to meshjs api
   * pass in context to draw, not canvas
