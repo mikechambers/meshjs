@@ -7,7 +7,7 @@
 	Copyright Mike Chambers 2018
 **/
 
-import meshjs from "../lib/mesh.js";
+import meshjs from "../../lib/mesh.js";
 
 /************ CONFIG **************/
 
@@ -19,6 +19,9 @@ const config = {
 
   //app name, used for saving files
   PROJECT_NAME: meshjs.getProjectName(),
+
+  //prints config to console at init
+  PRINT_CONFIG_ON_START: false,
 
   //whether we proxy and capture canvas calls so we can spit out svg
   //svg output currently not implimented
