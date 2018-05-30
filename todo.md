@@ -53,7 +53,8 @@ Maybe we have basics, and then you can pass in pre functions? Are these needed? 
 rectangle.draw(context,
   function(context){
     context.lineCap = "butt"
-  });````
+  });
+  ````
 
 Maybe just allow them to pass in a style instance which has properties, and has a static method to let you set default for all instances.
 
