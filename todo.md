@@ -9,6 +9,10 @@
 * Update readme with updated features and getting started
 * if CLEAR_CANVAS is true, should we call clear before calling init?
 * look at using toBlob to download PNG as opposed to data url
+* is there a way to get around to redrawing entire canvas each frame (background color?)
+* confirm that the way we scale is using GPU
+* look into performance of not calling clearRect in clear
+* look more into the ImageSmoothingQuality settings
 
 ### Bigger Items
 
