@@ -1,5 +1,4 @@
 import Color from "../../lib/color.js";
-//import "babel-polyfill";
 import { expect } from "chai";
 
 describe("Color constructor : RGB", () => {
