@@ -1,15 +1,18 @@
 import Rectangle from "../../lib/rectangle.js";
-import { randomInt } from "../../lib/math.js";
+import { randomIntInclusive } from "../../lib/math.js";
 
 export default class PRectangle extends Rectangle {
-  jitter(amt = 1) {
-    this._x += randomInt(-amt, amt);
-    this._y += randomInt(-amt, amt);
-    this._width += randomInt(-amt, amt);
-    this._height += randomInt(-amt, amt);
+  constructor(x, y, width, height) {
+    super(x, y, width, height);
 
     this._fillColor = undefined;
     this._strokeColor = undefined;
+  }
+  jitter(amt = 1) {
+    this._x += randomIntInclusive(-amt, amt);
+    this._y += randomIntInclusive(-amt, amt);
+    this._width += randomIntInclusive(-amt, amt);
+    this._height += randomIntInclusive(-amt, amt);
   }
 
   set fillColor(value) {
