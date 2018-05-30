@@ -12,26 +12,6 @@ import meshjs from "../../lib/mesh.js";
 /************ CONFIG **************/
 
 const config = {
-  /**** required for mesh lib ******/
-
-  //name of container that generated canvas will be created in
-  PARENT_ID: "canvas_container",
-
-  //app name, used for saving files
-  PROJECT_NAME: meshjs.getProjectName(),
-
-  //prints config to console at init
-  PRINT_CONFIG_ON_START: false,
-
-  //whether we proxy and capture canvas calls so we can spit out svg
-  //svg output currently not implimented
-  CAPTURE_SVG: false,
-
-  //whether to output debug information (currently just for)
-  //canvas rendering. Note, currently CAPTURE_SVG must be
-  //set to true for this setting to take effect
-  ENABLE_DEBUG: false,
-
   //Dimensions that canvas will be rendered at
   RENDER_HEIGHT: 1080,
   RENDER_WIDTH: 1080,
@@ -49,19 +29,12 @@ const config = {
   //background color for display and offscreen canvas
   CANVAS_BACKGROUND_COLOR: "#FAFAFA",
 
-  //whether a single frame is rendered, or draw is called based on FPS setting
-  ANIMATE: false,
-  FPS: 60,
-
   //Where video of canvas is recorded
   RECORD_VIDEO: false,
 
-  //whether canvas should be cleared prior to each call to draw
-  CLEAR_CANVAS: false,
-
   /*
     Custom keyboard commands for project. These will be printed in the console
-    at start. Commands should be in able format like so:
+    at start. Commands should be in a format like so:
     KEY_COMMANDS: {
       g: "Add nodes",
       b: "Cycle through colors"
@@ -74,17 +47,18 @@ const config = {
 
 /************** GLOBAL VARIABLES ************/
 
-let ctx;
 let bounds;
-
 /*************** CODE ******************/
 
-const init = function(canvas) {
-  ctx = canvas.context;
-  bounds = canvas.bounds;
+const init = function(context) {
+  bounds = meshj.bounds;
+
+  /******* called when project is being initialized *******/
 };
 
-const draw = function(canvas, frameCount) {};
+const draw = function(context, frameCount) {
+  /***** called once per frame ******/
+};
 
 window.onload = function() {
   meshjs.init(config, init, draw);
