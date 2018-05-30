@@ -8,7 +8,6 @@
 **/
 
 import meshjs from "../../lib/mesh.js";
-//import Rectangle from "../../lib/rectangle.js";
 import PRectangle from "./prectangle.js";
 import Color from "../../lib/color.js";
 import ColorPalette, { randomColorPallete } from "../../lib/colorpallete.js";
@@ -28,16 +27,16 @@ const config = {
   MAX_DISPLAY_WIDTH: 540,
 
   //background color of html page
-  BACKGROUND_COLOR: "#EEEEEE",
+  BACKGROUND_COLOR: "#FFFFFF",
 
   //background color for display and offscreen canvas
   CANVAS_BACKGROUND_COLOR: "#FAFAFA",
 
   //Where video of canvas is recorded
-  RECORD_VIDEO: false,
+  RECORD_VIDEO: true,
 
   //whether canvas should be cleared prior to each call to draw
-  CLEAR_CANVAS: false,
+  CLEAR_CANVAS: true,
 
   /*
     Custom keyboard commands for project. These will be printed in the console
@@ -47,7 +46,10 @@ const config = {
       b: "Cycle through colors"
     },
   */
-  KEY_COMMANDS: {}
+  KEY_COMMANDS: {},
+
+  PADDING: -200,
+  FILL_OPACITY: 0.1
 
   /*********** APP Specific Settings ************/
 };
@@ -74,9 +76,9 @@ const init = function(context) {
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
       let r = new PRectangle(x * rows, y * cols, cols, rows);
-      r.pad(20);
+      r.pad(config.PADDING);
 
-      r.fillColor = cp.getRandomColor();
+      r.fillColor = cp.getRandomColor(config.FILL_OPACITY);
       r.strokeColor = Color.WHITE;
 
       rectangles.push(r);
@@ -87,10 +89,12 @@ const init = function(context) {
 const draw = function(context, frameCount) {
   //see if we can store these
   context.strokeStyle = Color.BLACK.toRGBA();
-  context.fillStyle = Color.WHITE.toRGBA();
+  //context.fillStyle = Color.WHITE.toRGBA();
 
   for (let r of rectangles) {
     r.jitter(1);
+
+    context.fillStyle = r.fillColor.toRGBA();
     context.strokeRect(r.x, r.y, r.width, r.height);
     context.fillRect(r.x, r.y, r.width, r.height);
   }
