@@ -8,6 +8,7 @@
   * Rename to indicate its using canvas implementation?
 * Update readme with updated features and getting started
 * if CLEAR_CANVAS is true, should we call clear before calling init?
+* look at using toBlob to download PNG as opposed to data url
 
 ### Bigger Items
 
