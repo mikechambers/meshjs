@@ -1,30 +1,93 @@
-### todo
+## todo
 
-* Do custom implimentation of Gradient (maybe that maps to SVG
+### Tweaks
+
+* Need to do a pass through all project and update configs and make sure everything runs then check in.
+* Need to look at pointOnLine (try to figure out why we have to reverse angle)
+* Gradient
+  * Add support for other gradient directions in  Gradient class
+  * Rename to indicate its using canvas implementation?
+* Update readme with updated features and getting started
+* if CLEAR_CANVAS is true, should we call clear before calling init?
+* fix keycommand output in fractaltree_obj_2_cm/
+
+### Bigger Items
+
+* Do custom implementation of Gradient (maybe that maps to SVG
 * Think about SVG support (using the canvas api)
 * Motion classes
-* Need to look at pointOnLine (try to figure out why we have to reverse angle)
+* Drawing model (see below)
+* Figure out video capture bug
+* Maybe rethink promise support in meshjs / circlepack_mask. Seems a bit over complicated
 
+### Tooling
+* NPM node to watch dir for downloads and copy
+* Could implement download through an NPM server / node app, but might make ease of getting started too difficult
+* Add support for auto reloading page when files update
+* Rethink config. Most we never change. Maybe have defaults for most and comment those out?
 
-* Expand SVG export support
-  * rectangle
-  * circle
-  * line (create)
-* add line object
-* add draw method to Gradient
-* clean up SVG stuff
-* more robust SVG capture
-  * perhaps just proxy the context object and pass that around. then capture commands with a setting to capture SVG. clear when we clear screen. could initially just implement some calls and proxy the others through.
-* With new context proxy we can do some optimizations when redrawing. specifically, we may be able to check whether there have been any new commands since the last render, and if not, skip redrawing the screen
-* We can also do things like save a set of commands and play them back in the future. basically you could add forward / rewind
-* add shortcut to open generated files in new tab instead of downloading
-* what should we name apis we add onto canvas?
-  * draw, create, add, render
+### Drawing model
 
+Could go with a procedural model based on context (i.e. dont add new APIs to context), but objects can draw themselves if passed a context object.
 
+i.e. drawable objects have a draw(context) method, which then call the regular draw apis.
 
+We dont add new draw apis to context.
 
-  ## SVG capture
+Are all base classes drawable? i.e. Circle, Rectangle? or do we have drawable versions (Bounds, Rectangle).
+
+If they are drawable, they need the following:
+* Required
+ * draw(context) method
+ * fillStyle
+ * strokeStyle
+ * lineWidth
+* Via Style
+  * lineCap ?
+  * lineDashOffset ?
+  * lineJoin ?
+  * lineWidth ?
+  * miterLimit ?
+
+Maybe we have basics, and then you can pass in pre functions? Are these needed? you could just manually call them before.
+
+````javascript
+rectangle.draw(context,
+  function(context){
+    context.lineCap = "butt"
+  });````
+
+Maybe just allow them to pass in a style instance which has properties, and has a static method to let you set default for all instances.
+
+Have to be careful we only make calls for things that are explicitly set.
+
+Perhaps rectangle drawing is simple, if you need more advanced you need to do manually, or override the draw method.
+
+Or maybe that is the solution. We have  a default draw, and you can override it dynamically. Or maybe there is no draw and you attach it if you need it (or subclass it). Overriding probably makes more sense, although quickly drawing is really convient.
+
+So, basic draw methods, and you subclass or override if you need more control.
+
+Classes
+* rectangle
+* circle
+* line
+* path (contains lines)
+
+### Context proxy
+
+Currently, we proxy all calls, and save function closures. We need to make a decision on what the default is.
+
+There is overhead right now when not batching, as we wrap the calls. We make it where in the constructor, we dynamically set each method based on whether we batch or now. that way, if you dont batch, we can just pass the call on directly.
+
+We will also probably need to add a simply command class that contains the function closure, arguments and event name. Will probably need this for SVG export, so we dont have to try to build SVG when calls are made, but can instead do at the end of the frame.
+
+## Video Capture issue
+
+Sometimes video capture will kill performance of a project. It doesnt seem to have anything to do with number of calls or items being drawn.
+
+I can fix it if I batch all calls in the context proxy so they are all called at once.
+
+## SVG Export
   * move  PROJECT_NAME meshjs.getProjectName() to meshjs api
   * pass in context to draw, not canvas
 
@@ -38,3 +101,18 @@
 or something like that. we could save those in an array and then loop through at the end of the draw loop and call them.
 
 We would then have a property on whether we should capture SVG, in which case, when we proxy the calls, we also create svg nodes from the calls, which we could then loop through and output when needed.
+
+* Expand SVG export support
+  * rectangle
+  * circle
+  * line (create)
+* add line object
+* add draw method to Gradient
+
+* more robust SVG capture
+  * perhaps just proxy the context object and pass that around. then capture commands with a setting to capture SVG. clear when we clear screen. could initially just implement some calls and proxy the others through.
+* With new context proxy we can do some optimizations when redrawing. specifically, we may be able to check whether there have been any new commands since the last render, and if not, skip redrawing the screen
+* We can also do things like save a set of commands and play them back in the future. basically you could add forward / rewind
+* add shortcut to open generated files in new tab instead of downloading
+* what should we name apis we add onto canvas?
+  * draw, create, add, render
