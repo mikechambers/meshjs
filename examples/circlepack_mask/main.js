@@ -29,22 +29,6 @@ let colorSource = {
 };
 
 let config = {
-  /**** required for mesh lib ******/
-
-  //name of container that generated canvas will be created in
-  PARENT_ID: "canvas_container",
-
-  //app name, used for saving files
-  PROJECT_NAME: meshjs.getProjectName(),
-
-  //whether we proxy and capture canvas calls so we can spit out svg
-  //svg output currently not implimented
-  CAPTURE_SVG: false,
-
-  //whether to output debug information (currently just for)
-  //canvas rendering.
-  ENABLE_DEBUG: false,
-
   //Dimensions that canvas will be rendered at
   RENDER_HEIGHT: 1080, //1600,
   RENDER_WIDTH: 1080, //2560,
@@ -62,15 +46,8 @@ let config = {
   //background color for display and offscreen canvas
   CANVAS_BACKGROUND_COLOR: "#FFFFFF",
 
-  //whether a single frame is rendered, or draw is called based on FPS setting
-  ANIMATE: true,
-  FPS: 60,
-
   //Where video of canvas is recorded
-  RECORD_VIDEO: true,
-
-  //whether canvas should be cleared prior to each call to draw
-  CLEAR_CANVAS: true,
+  RECORD_VIDEO: false,
 
   /*********** APP Specific Settings ************/
 
@@ -91,7 +68,6 @@ let config = {
 
 /************** GLOBAL VARIABLES ************/
 
-let ctx;
 let bounds;
 let circles;
 
@@ -110,9 +86,8 @@ let pointBounds;
 
 /*************** CODE ******************/
 
-const init = function(canvas) {
-  ctx = canvas.context;
-  bounds = canvas.bounds;
+const init = function(context) {
+  bounds = meshjs.bounds;
   pointBounds = bounds.withPadding(
     config.STROKE_SIZE + config.CIRCLE_BOUNDS_PADDING
   );
@@ -138,11 +113,11 @@ const init = function(canvas) {
   pAmount = 1;
 };
 
-const draw = function(canvas, frameCount) {
+const draw = function(context, frameCount) {
   if (!(frameCount % 60)) {
     let total = originalPixels.length;
     let current = pixels.length;
-    let per = 100 - Math.round(current / total * 100);
+    let per = 100 - Math.round((current / total) * 100);
     console.log(`${per}%`, pixels.length, circles.length);
   }
 
@@ -194,7 +169,7 @@ const draw = function(canvas, frameCount) {
     c.grow();
 
     if (_doDraw) {
-      c.draw(ctx);
+      c.draw(context);
     }
   }
 
@@ -291,8 +266,8 @@ window.onload = function() {
     config.TEMPLATE,
     function(pd) {
       originalPixels = pd.filter(Color.BLACK);
-      r();
+      r(); //tell mesh js we are ready
     },
-    meshjs.canvas.bounds
+    meshjs.bounds
   );
 };

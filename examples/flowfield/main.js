@@ -19,22 +19,6 @@ import Gradient from "../../lib/gradient.js";
 /************ CONFIG **************/
 
 const config = {
-  /**** required for mesh lib ******/
-
-  //name of container that generated canvas will be created in
-  PARENT_ID: "canvas_container",
-
-  //app name, used for saving files
-  PROJECT_NAME: meshjs.getProjectName(),
-
-  //whether we proxy and capture canvas calls so we can spit out svg
-  //svg output currently not implimented
-  CAPTURE_SVG: false,
-
-  //whether to output debug information (currently just for)
-  //canvas rendering.
-  ENABLE_DEBUG: false,
-
   //Dimensions that canvas will be rendered at
   RENDER_HEIGHT: 1080,
   RENDER_WIDTH: 1080,
@@ -48,10 +32,6 @@ const config = {
 
   //background color for display and offscreen canvas
   CANVAS_BACKGROUND_COLOR: "#FFFFFF",
-
-  //whether a single frame is rendered, or draw is called based on FPS setting
-  ANIMATE: true,
-  FPS: 30,
 
   //Where video of canvas is recorded
   RECORD_VIDEO: false,
@@ -69,7 +49,6 @@ const config = {
 
 /************** GLOBAL VARIABLES ************/
 
-let ctx;
 let bounds;
 let canvas;
 
@@ -84,12 +63,8 @@ let pixelData;
 
 /*************** CODE ******************/
 
-const init = function(canvas) {
-  ctx = canvas.context;
-  bounds = canvas.bounds;
-
-  //todo: do we need this?
-  canvas.clear();
+const init = function(context) {
+  bounds = meshjs.bounds;
 
   let gradient = new Gradient(bounds);
   gradient.addColorStop(0, "#FF0000");
@@ -118,7 +93,7 @@ const init = function(canvas) {
   }
 };
 
-const draw = function() {
+const draw = function(context) {
   let yoff = 0;
   for (let y = 0; y < rows; y++) {
     let xoff = 0;
@@ -132,19 +107,19 @@ const draw = function() {
 
       vectors[index] = v;
 
-      ctx.save();
+      context.save();
 
       if (config.DRAW_VECTORS) {
-        ctx.translate(x * config.SCALE, y * config.SCALE);
-        ctx.rotate(v.heading);
+        context.translate(x * config.SCALE, y * config.SCALE);
+        context.rotate(v.heading);
 
-        ctx.strokeStyle = "rgb(0, 0, 0, 0.2)";
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineTo(config.SCALE, 0);
-        ctx.stroke();
+        context.strokeStyle = "rgb(0, 0, 0, 0.2)";
+        context.beginPath();
+        context.moveTo(0, 0);
+        context.lineTo(config.SCALE, 0);
+        context.stroke();
 
-        ctx.restore();
+        context.restore();
       }
       xoff += config.INCREMENT;
     }
@@ -162,7 +137,7 @@ const draw = function() {
     p.applyForce(force);
 
     p.update();
-    p.show(ctx, pixelData);
+    p.show(context, pixelData);
   }
 };
 

@@ -14,14 +14,6 @@ import Color from "../../lib/color.js";
 /************ CONFIG **************/
 
 const config = {
-  /**** required for mesh lib ******/
-
-  //name of container that generated canvas will be created in
-  PARENT_ID: "canvas_container",
-
-  //app name, used for saving files
-  PROJECT_NAME: meshjs.getProjectName(),
-
   //Dimensions that canvas will be rendered at
   RENDER_HEIGHT: 1080,
   RENDER_WIDTH: 1080,
@@ -41,30 +33,24 @@ const config = {
 
   //whether a single frame is rendered, or draw is called based on FPS setting
   ANIMATE: false,
-  FPS: 30,
 
   //Where video of canvas is recorded
-  RECORD_VIDEO: false,
-
-  //whether canvas should be cleared prior to each call to draw
-  CLEAR_CANVAS: false
+  RECORD_VIDEO: false
 
   /*********** APP Specific Settings ************/
 };
 
 /************** GLOBAL VARIABLES ************/
 
-let ctx;
 let bounds;
 
 /*************** CODE ******************/
 
-const init = function(canvas) {
-  ctx = canvas.context;
-  bounds = canvas.bounds;
+const init = function(context) {
+  bounds = meshjs.bounds;
 };
 
-const draw = function(canvas) {};
+const draw = function(context) {};
 
 //https://stackoverflow.com/a/46719196/10232
 let regex = /[^\u0000-\u00ff]/; // Small performance gain from pre-compiling the regex

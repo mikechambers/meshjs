@@ -26,22 +26,6 @@ let colorSource = {
 };
 
 let config = {
-  /**** required for mesh lib ******/
-
-  //name of container that generated canvas will be created in
-  PARENT_ID: "canvas_container",
-
-  //app name, used for saving files
-  PROJECT_NAME: meshjs.getProjectName(),
-
-  //whether we proxy and capture canvas calls so we can spit out svg
-  //svg output currently not implimented
-  CAPTURE_SVG: false,
-
-  //whether to output debug information (currently just for)
-  //canvas rendering.
-  ENABLE_DEBUG: false,
-
   //Dimensions that canvas will be rendered at
   RENDER_HEIGHT: 1080, //1600,
   RENDER_WIDTH: 1080, //2560,
@@ -59,12 +43,8 @@ let config = {
   //background color for display and offscreen canvas
   CANVAS_BACKGROUND_COLOR: "#FFFFFF",
 
-  //whether a single frame is rendered, or draw is called based on FPS setting
-  ANIMATE: true,
-  FPS: 60,
-
   //Where video of canvas is recorded
-  RECORD_VIDEO: true,
+  RECORD_VIDEO: false,
 
   //whether canvas should be cleared prior to each call to draw
   CLEAR_CANVAS: true,
@@ -85,8 +65,8 @@ let config = {
 
 /************** GLOBAL VARIABLES ************/
 
-let ctx;
 let bounds;
+
 let circles;
 
 let pAmount;
@@ -102,10 +82,10 @@ let pointBounds;
 
 /*************** CODE ******************/
 
-const init = function(canvas) {
-  ctx = canvas.context;
-  bounds = canvas.bounds.withPadding(config.BOUNDS_PADDING);
-  pointBounds = bounds.withPadding(config.RADIUS + config.STROKE_SIZE);
+const init = function(context) {
+  bounds = meshjs.bounds.withPadding(config.BOUNDS_PADDING);
+
+  pointBounds = meshjs.bounds.withPadding(config.RADIUS + config.STROKE_SIZE);
 
   pixels = new Array();
   _completed = false;
@@ -119,7 +99,7 @@ const init = function(canvas) {
   } else if (config.COLOR_SOURCE == colorSource.GRADIENT) {
     gradient = gradientFromName(
       "Bluelagoo",
-      bounds,
+      _bounds,
       Gradient.TOP_RIGHT_TO_BOTTOM_LEFT
     );
     gradient.create();
@@ -142,11 +122,11 @@ const init = function(canvas) {
   pAmount = 1;
 };
 
-const draw = function(canvas, frameCount) {
+const draw = function(context, frameCount) {
   if (!(frameCount % 60)) {
     let total = bounds.height * bounds.width;
     let current = pixels.length;
-    let per = 100 - Math.round(current / total * 100);
+    let per = 100 - Math.round((current / total) * 100);
     console.log(`${per}%`, pixels.length, circles.length);
   }
 
@@ -208,7 +188,7 @@ const draw = function(canvas, frameCount) {
     c.grow();
 
     if (_doDraw) {
-      c.draw(ctx);
+      c.draw(context);
     }
   }
 
@@ -290,7 +270,7 @@ const createDonotMask = function() {
 
   circles.push(c);
 
-  let stepSize = Math.PI * 2 / 40;
+  let stepSize = (Math.PI * 2) / 40;
   for (let i = 0; i < Math.PI * 2; i += stepSize) {
     //get point on circle
 

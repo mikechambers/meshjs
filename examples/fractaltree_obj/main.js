@@ -20,22 +20,6 @@ import Gradient, { gradientFromName } from "../../lib/gradient.js";
 /************ CONFIG **************/
 
 const config = {
-  /**** required for mesh lib ******/
-
-  //name of container that generated canvas will be created in
-  PARENT_ID: "canvas_container",
-
-  //app name, used for saving files
-  PROJECT_NAME: meshjs.getProjectName(),
-
-  //whether we proxy and capture canvas calls so we can spit out svg
-  //svg output currently not implimented
-  CAPTURE_SVG: false,
-
-  //whether to output debug information (currently just for)
-  //canvas rendering.
-  ENABLE_DEBUG: false,
-
   //Dimensions that canvas will be rendered at
   RENDER_HEIGHT: 1080,
   RENDER_WIDTH: 1080,
@@ -53,15 +37,8 @@ const config = {
   //background color for display and offscreen canvas
   CANVAS_BACKGROUND_COLOR: "#222222",
 
-  //whether a single frame is rendered, or draw is called based on FPS setting
-  ANIMATE: true,
-  FPS: 60,
-
   //Where video of canvas is recorded
-  RECORD_VIDEO: true,
-
-  //whether canvas should be cleared prior to each call to draw
-  CLEAR_CANVAS: true,
+  RECORD_VIDEO: false,
 
   /*********** APP Specific Settings ************/
 
@@ -77,7 +54,7 @@ const config = {
 
 //hot pink : 255,20,147
 
-let ctx;
+let _context;
 let bounds;
 
 let circle;
@@ -92,9 +69,9 @@ let gradient;
 
 let tree;
 let leafColor;
-const init = function(canvas) {
-  ctx = canvas.context;
-  bounds = canvas.bounds;
+const init = function(context) {
+  _context = context;
+  bounds = meshjs.bounds;
 
   gradient = gradientFromName(
     config.GRADIENT_NAME,
@@ -122,8 +99,8 @@ const init = function(canvas) {
   }
 };
 
-const draw = function(canvas, frameCount) {
-  ctx.drawImage(
+const draw = function(context, frameCount) {
+  context.drawImage(
     gradient.canvas,
     bounds.x,
     bounds.y,
@@ -132,7 +109,7 @@ const draw = function(canvas, frameCount) {
   );
 
   for (let b of tree) {
-    b.draw(ctx);
+    b.draw(context);
   }
 };
 

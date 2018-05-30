@@ -48,7 +48,6 @@ export default class PCircle extends Circle {
         (this._boundsPadding - this._strokeSize) / 2 <=
         bounds.y
     ) {
-      this.cache();
       this._hasCollided = true;
       return;
     }
@@ -62,7 +61,6 @@ export default class PCircle extends Circle {
         c.radius + this._radius >=
         c.center.distance(this._center) + this._boundsPadding - this._strokeSize
       ) {
-        this.cache();
         this._hasCollided = true;
         return;
       }

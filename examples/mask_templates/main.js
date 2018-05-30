@@ -14,22 +14,6 @@ import { loadPixelDataFromPathWithBounds } from "../../lib/pixeldata.js";
 /************ CONFIG **************/
 
 const config = {
-  /**** required for mesh lib ******/
-
-  //name of container that generated canvas will be created in
-  PARENT_ID: "canvas_container",
-
-  //app name, used for saving files
-  PROJECT_NAME: meshjs.getProjectName(),
-
-  //whether we proxy and capture canvas calls so we can spit out svg
-  //svg output currently not implimented
-  CAPTURE_SVG: false,
-
-  //whether to output debug information (currently just for)
-  //canvas rendering.
-  ENABLE_DEBUG: false,
-
   //Dimensions that canvas will be rendered at
   RENDER_HEIGHT: 640,
   RENDER_WIDTH: 1080,
@@ -63,19 +47,17 @@ const config = {
 
 /************** GLOBAL VARIABLES ************/
 
-let ctx;
 let bounds;
 let _pd;
 
 /*************** CODE ******************/
 
-const init = function(canvas) {
-  ctx = canvas.context;
-  bounds = canvas.bounds;
+const init = function(context) {
+  bounds = meshjs.bounds;
 };
 
-const draw = function(canvas, frameCount) {
-  ctx.putImageData(_pd.imageData, 0, 0);
+const draw = function(context, frameCount) {
+  context.putImageData(_pd.imageData, 0, 0);
 };
 
 window.onload = function() {

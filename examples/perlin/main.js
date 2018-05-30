@@ -14,22 +14,6 @@ import Color from "../../lib/color.js";
 /************ CONFIG **************/
 
 const config = {
-  /**** required for mesh lib ******/
-
-  //name of container that generated canvas will be created in
-  PARENT_ID: "canvas_container",
-
-  //app name, used for saving files
-  PROJECT_NAME: meshjs.getProjectName(),
-
-  //whether we proxy and capture canvas calls so we can spit out svg
-  //svg output currently not implimented
-  CAPTURE_SVG: false,
-
-  //whether to output debug information (currently just for)
-  //canvas rendering.
-  ENABLE_DEBUG: false,
-
   //Dimensions that canvas will be rendered at
   RENDER_HEIGHT: 1080,
   RENDER_WIDTH: 1080,
@@ -38,15 +22,13 @@ const config = {
   MAX_DISPLAY_HEIGHT: 640,
   MAX_DISPLAY_WIDTH: 640,
 
+  BATCH_CANVAS_CALLS: false,
+
   //background color of html page
   BACKGROUND_COLOR: "#000000",
 
   //background color for display and offscreen canvas
   CANVAS_BACKGROUND_COLOR: "#FFFFFF",
-
-  //whether a single frame is rendered, or draw is called based on FPS setting
-  ANIMATE: true,
-  FPS: 30,
 
   //Where video of canvas is recorded
   RECORD_VIDEO: false,
@@ -61,7 +43,6 @@ const config = {
 
 /************** GLOBAL VARIABLES ************/
 
-let ctx;
 let bounds;
 
 let cols;
@@ -72,9 +53,8 @@ let zoff;
 
 /*************** CODE ******************/
 
-const init = function(canvas) {
-  ctx = canvas.context;
-  bounds = canvas.bounds;
+const init = function(context) {
+  bounds = meshjs.bounds;
 
   rows = Math.floor(bounds.height / config.SCALE);
   cols = Math.floor(bounds.width / config.SCALE);
@@ -82,7 +62,8 @@ const init = function(canvas) {
   zoff = Math.random(10000);
 };
 
-const draw = function() {
+const draw = function(context) {
+  //probably should do this on an image / offscreen canvas and then copy over
   let yoff = 0;
   for (let y = 0; y < rows; y++) {
     let xoff = 0;
@@ -91,8 +72,8 @@ const draw = function() {
 
       let c = new Color(r);
 
-      ctx.fillStyle = c.toRGBA();
-      ctx.fillRect(
+      context.fillStyle = c.toRGBA();
+      context.fillRect(
         x * config.SCALE,
         y * config.SCALE,
         config.SCALE,

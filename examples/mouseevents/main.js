@@ -14,22 +14,6 @@ import Color from "../../lib/color.js";
 /************ CONFIG **************/
 
 const config = {
-  /**** required for mesh lib ******/
-
-  //name of container that generated canvas will be created in
-  PARENT_ID: "canvas_container",
-
-  //app name, used for saving files
-  PROJECT_NAME: meshjs.getProjectName(),
-
-  //whether we proxy and capture canvas calls so we can spit out svg
-  //svg output currently not implimented
-  CAPTURE_SVG: false,
-
-  //whether to output debug information (currently just for)
-  //canvas rendering.
-  ENABLE_DEBUG: false,
-
   //Dimensions that canvas will be rendered at
   RENDER_HEIGHT: 1080,
   RENDER_WIDTH: 1080,
@@ -47,10 +31,6 @@ const config = {
   //background color for display and offscreen canvas
   CANVAS_BACKGROUND_COLOR: "#FFFFFF",
 
-  //whether a single frame is rendered, or draw is called based on FPS setting
-  ANIMATE: true,
-  FPS: 60,
-
   //Where video of canvas is recorded
   RECORD_VIDEO: false,
 
@@ -63,19 +43,19 @@ const config = {
 
 /************** GLOBAL VARIABLES ************/
 
-let ctx;
 let bounds;
+let _context;
+let listenMouseMove = true;
 
 /*************** CODE ******************/
 
-const init = function(canvas) {
-  ctx = canvas.context;
-  bounds = canvas.bounds;
+const init = function(context) {
+  _context = context;
+  bounds = meshjs.bounds;
 };
 
-const draw = function(canvas, frameCount) {};
+const draw = function(context, frameCount) {};
 
-let listenMouseMove = true;
 const click = function(event) {
   let position = event.position;
 
@@ -83,7 +63,7 @@ const click = function(event) {
 
   let c = new Circle(position, config.RADIUS);
   c.fillColor = new Color(255, 0, 0, 0.5);
-  c.draw(ctx);
+  c.draw(_context);
 
   meshjs.listen(mousemove, (listenMouseMove = !listenMouseMove));
 };
@@ -94,7 +74,7 @@ const mouseup = function(event) {
 
   let c = new Circle(position, config.RADIUS * 2);
   c.fillColor = new Color(0, 0, 255, 0.5);
-  c.draw(ctx);
+  c.draw(_context);
 };
 
 const mousedown = function(event) {
@@ -103,7 +83,7 @@ const mousedown = function(event) {
 
   let c = new Circle(position, config.RADIUS * 2);
   c.fillColor = new Color(128, 255, 0, 0.5);
-  c.draw(ctx);
+  c.draw(_context);
 };
 
 const mousemove = function(event) {
@@ -112,7 +92,7 @@ const mousemove = function(event) {
 
   let c = new Circle(position, config.RADIUS);
   c.fillColor = new Color(255, 0, 0);
-  c.draw(ctx);
+  c.draw(_context);
 };
 
 window.onload = function() {

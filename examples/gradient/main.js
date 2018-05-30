@@ -13,21 +13,12 @@ import meshjs from "../../lib/mesh.js";
 /************ CONFIG **************/
 
 const config = {
-  /**** required for mesh lib ******/
-
-  //name of container that generated canvas will be created in
-  PARENT_ID: "canvas_container",
-
-  //app name, used for saving files
-  PROJECT_NAME: meshjs.getProjectName(),
-
   //Dimensions that canvas will be rendered at
   RENDER_HEIGHT: 1080,
   RENDER_WIDTH: 1920,
 
-  //whether we proxy and capture canvas calls so we can spit out svg
-  //svg output currently not implimented
-  CAPTURE_SVG: false,
+  //whether canvas calls are batched and executed at once, or as they are made
+  BATCH_CANVAS_CALLS: false,
 
   //whether to output debug information (currently just for)
   //canvas rendering.
@@ -48,7 +39,6 @@ const config = {
 
   //whether a single frame is rendered, or draw is called based on FPS setting
   ANIMATE: false,
-  FPS: 30,
 
   //Where video of canvas is recorded
   RECORD_VIDEO: false,
@@ -63,30 +53,14 @@ const config = {
 
 /************** GLOBAL VARIABLES ************/
 
-let ctx;
 let bounds;
-let canvas;
-
-let cols;
-let rows;
-let zoff = 0;
-
-let particles;
-let vectors;
-
-let pixelData;
 
 /*************** CODE ******************/
-
-//three methods to impliment
-// init() (currently )
-
-const init = function(canvas) {
-  ctx = canvas.context;
-  bounds = canvas.bounds;
+const init = function(context) {
+  bounds = meshjs.bounds;
 };
 
-const draw = function() {
+const draw = function(context) {
   let gradient = gradientFromName(
     "Rainbow Blue",
     bounds,
@@ -94,7 +68,7 @@ const draw = function() {
   );
   gradient.create();
 
-  ctx.drawImage(
+  context.drawImage(
     gradient.canvas,
     bounds.x,
     bounds.y,

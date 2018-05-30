@@ -16,22 +16,6 @@ import { map } from "../../lib/math.js";
 /************ CONFIG **************/
 
 const config = {
-  /**** required for mesh lib ******/
-
-  //name of container that generated canvas will be created in
-  PARENT_ID: "canvas_container",
-
-  //app name, used for saving files
-  PROJECT_NAME: meshjs.getProjectName(),
-
-  //whether we proxy and capture canvas calls so we can spit out svg
-  //svg output currently not implimented
-  CAPTURE_SVG: false,
-
-  //whether to output debug information (currently just for)
-  //canvas rendering.
-  ENABLE_DEBUG: false,
-
   //Dimensions that canvas will be rendered at
   RENDER_HEIGHT: 1080,
   RENDER_WIDTH: 1080,
@@ -49,15 +33,8 @@ const config = {
   //background color for display and offscreen canvas
   CANVAS_BACKGROUND_COLOR: "#222222",
 
-  //whether a single frame is rendered, or draw is called based on FPS setting
-  ANIMATE: true,
-  FPS: 60,
-
   //Where video of canvas is recorded
   RECORD_VIDEO: true,
-
-  //whether canvas should be cleared prior to each call to draw
-  CLEAR_CANVAS: true,
 
   /*********** APP Specific Settings ************/
   STROKE_COLOR: "#FFFFFF",
@@ -67,8 +44,8 @@ const config = {
 
 /************** GLOBAL VARIABLES ************/
 
-let ctx;
 let bounds;
+let _context;
 
 let circle;
 let angle = 0;
@@ -77,25 +54,25 @@ let mousePosition = new Vector();
 
 /*************** CODE ******************/
 
-const init = function(canvas) {
-  ctx = canvas.context;
-  bounds = canvas.bounds;
+const init = function(context) {
+  bounds = meshjs.bounds;
+  _context = context;
 
   circle = new Circle(new Vector(-50, -50), 6);
   circle.fillColor = Color.WHITE;
 };
 
-const draw = function(canvas, frameCount) {
+const draw = function(context, frameCount) {
   circle.center.x = mousePosition.x;
   circle.center.y = bounds.height;
-  circle.draw(ctx);
+  circle.draw(context);
 
   angle = map(circle.center.x, 0, bounds.width, 0, Math.PI * 2);
 
-  ctx.save();
-  ctx.translate(bounds.center.x, bounds.height);
+  context.save();
+  context.translate(bounds.center.x, bounds.height);
   branch(config.START_LENGTH);
-  ctx.restore();
+  context.restore();
 };
 
 const branch = function(len) {
@@ -104,26 +81,26 @@ const branch = function(len) {
   }
 
   drawLine(new Vector(0, 0), new Vector(0, -len));
-  ctx.translate(0, -len);
+  _context.translate(0, -len);
 
-  ctx.save();
-  ctx.rotate(angle);
+  _context.save();
+  _context.rotate(angle);
   branch(len * 0.67);
-  ctx.restore();
+  _context.restore();
 
-  ctx.save();
-  ctx.rotate(-angle);
+  _context.save();
+  _context.rotate(-angle);
   branch(len * 0.67);
-  ctx.restore();
+  _context.restore();
 };
 
 const drawLine = function(start, end) {
-  ctx.beginPath();
-  ctx.strokeStyle = config.STROKE_COLOR;
-  ctx.lineWidth = config.STROKE_WIDTH;
-  ctx.moveTo(start.x, start.y);
-  ctx.lineTo(end.x, end.y);
-  ctx.stroke();
+  _context.beginPath();
+  _context.strokeStyle = config.STROKE_COLOR;
+  _context.lineWidth = config.STROKE_WIDTH;
+  _context.moveTo(start.x, start.y);
+  _context.lineTo(end.x, end.y);
+  _context.stroke();
 };
 
 const mousemove = function(event) {
