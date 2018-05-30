@@ -2,14 +2,12 @@
 
 ### Tweaks
 
-* Need to do a pass through all project and update configs and make sure everything runs then check in.
 * Need to look at pointOnLine (try to figure out why we have to reverse angle)
 * Gradient
   * Add support for other gradient directions in  Gradient class
   * Rename to indicate its using canvas implementation?
 * Update readme with updated features and getting started
 * if CLEAR_CANVAS is true, should we call clear before calling init?
-* fix keycommand output in fractaltree_obj_2_cm/
 
 ### Bigger Items
 
