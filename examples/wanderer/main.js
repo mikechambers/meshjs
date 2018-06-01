@@ -75,7 +75,7 @@ const draw = function(context, frameCount) {
     }
 
     let strokeColor = pd.getColor(position, config.STROKE_OPACITY);
-    context.strokeStyle = strokeColor.toRGBA();
+    context.strokeStyle = strokeColor.toCSS();
 
     context.beginPath();
     context.moveTo(position.x, position.y);

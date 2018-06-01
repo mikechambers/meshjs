@@ -153,12 +153,46 @@ describe("isEqualTo", () => {
   });
 });
 
-describe("toRGBA", () => {
-  it("toRGBA should return correct css rgba string", () => {
+describe("toCSS", () => {
+  it("toCSS should return correct css rgba string", () => {
     let c = new Color(23, 255, 8, 0.8);
     let rgba = "rgba(23, 255, 8, 0.8)";
 
-    expect(c.toRGBA()).to.equal(rgba);
+    expect(c.toCSS()).to.equal(rgba);
+  });
+});
+
+describe("toCSS", () => {
+  it("toCSS should return correct css rgba string after changing values", () => {
+    let r = 23;
+    let g = 255;
+    let b = 8;
+    let a = 0.8;
+
+    let c = new Color(r, g, b, a);
+    let rgba = `rgba(${r}, ${g}, ${b}, ${a})`;
+
+    expect(c.toCSS()).to.equal(rgba);
+
+    c.red = 255;
+    expect(c.toCSS()).to.equal(`rgba(255, ${g}, ${b}, ${a})`);
+    c.red = r;
+    expect(c.toCSS()).to.equal(rgba);
+
+    c.green = 128;
+    expect(c.toCSS()).to.equal(`rgba(${r}, 128, ${b}, ${a})`);
+    c.green = g;
+    expect(c.toCSS()).to.equal(rgba);
+
+    c.blue = 99;
+    expect(c.toCSS()).to.equal(`rgba(${r}, ${g}, 99, ${a})`);
+    c.blue = b;
+    expect(c.toCSS()).to.equal(rgba);
+
+    c.alpha = 0.1;
+    expect(c.toCSS()).to.equal(`rgba(${r}, ${g}, ${b}, 0.1)`);
+    c.alpha = a;
+    expect(c.toCSS()).to.equal(rgba);
   });
 });
 

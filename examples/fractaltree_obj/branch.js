@@ -35,7 +35,7 @@ export default class Branch {
   }
 
   draw(context) {
-    context.strokeStyle = this._branchColor.toRGBA();
+    context.strokeStyle = this._branchColor.toCSS();
     context.lineWidth = 1.0;
     context.beginPath();
     context.moveTo(this._start.x, this._start.y);
@@ -43,8 +43,8 @@ export default class Branch {
     context.stroke();
 
     context.fillStyle = this._hasChildren
-      ? Color.WHITE.toRGBA()
-      : this._leafColor.toRGBA();
+      ? Color.WHITE.toCSS()
+      : this._leafColor.toCSS();
     context.moveTo(this._end.x, this._end.y);
 
     let r = this._hasChildren ? this._nodeRadius : this._leafRadius;

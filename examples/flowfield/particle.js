@@ -38,7 +38,7 @@ export default class Particle {
     let c = pixelData.getColor(this._position);
     c.alpha = this._opacity;
 
-    context.strokeStyle = c.toRGBA();
+    context.strokeStyle = c.toCSS();
     context.lineWidth = 0.5;
     context.beginPath();
     context.moveTo(this._lastPosition.x, this._lastPosition.y);

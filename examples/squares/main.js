@@ -9,8 +9,10 @@
 
 import meshjs from "../../lib/mesh.js";
 import PRectangle from "./prectangle.js";
-import Color from "../../lib/color.js";
-import ColorPalette, { randomColorPallete } from "../../lib/colorpallete.js";
+import Color from "../../lib/color/color.js";
+import ColorPalette, {
+  randomColorPallete
+} from "../../lib/color/colorpallete.js";
 
 /************ CONFIG **************/
 
@@ -48,8 +50,10 @@ const config = {
   */
   KEY_COMMANDS: {},
 
-  PADDING: -200,
-  FILL_OPACITY: 0.1
+  PADDING: 0,
+  FILL_OPACITY: 0.7,
+  JITTER: true,
+  SCALE: 16
 
   /*********** APP Specific Settings ************/
 };
@@ -70,16 +74,25 @@ const init = function(context) {
   let cp = randomColorPallete();
   config.COLOR_PALLETE_NAME = cp.name;
 
-  let cols = bounds.width / 8;
-  let rows = bounds.height / 8;
+  let cols = Math.floor(bounds.width / config.SCALE);
+  let rows = Math.floor(bounds.height / config.SCALE);
+
+  let strokeColor = Color.WHITE;
+
   let i = 0;
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
-      let r = new PRectangle(x * rows, y * cols, cols, rows);
+      let r = new PRectangle(
+        x * config.SCALE,
+        y * config.SCALE,
+        config.SCALE,
+        config.SCALE
+      );
+
       r.pad(config.PADDING);
 
       r.fillColor = cp.getRandomColor(config.FILL_OPACITY);
-      r.strokeColor = Color.WHITE;
+      r.strokeColor = strokeColor;
 
       rectangles.push(r);
     }
@@ -88,13 +101,15 @@ const init = function(context) {
 
 const draw = function(context, frameCount) {
   //see if we can store these
-  context.strokeStyle = Color.BLACK.toRGBA();
-  //context.fillStyle = Color.WHITE.toRGBA();
+  context.strokeStyle = Color.WHITE.toCSS();
+  //context.fillStyle = Color.WHITE.toCSS();
 
   for (let r of rectangles) {
-    r.jitter(1);
+    if (config.JITTER) {
+      r.jitter(1);
+    }
 
-    context.fillStyle = r.fillColor.toRGBA();
+    context.fillStyle = r.fillColor.toCSS();
     context.strokeRect(r.x, r.y, r.width, r.height);
     context.fillRect(r.x, r.y, r.width, r.height);
   }

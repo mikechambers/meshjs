@@ -77,7 +77,7 @@ export default class Branch {
       }
     }
 
-    context.strokeStyle = this._branchColor.toRGBA();
+    context.strokeStyle = this._branchColor.toCSS();
     context.lineWidth = 1.0;
 
     let r = this.hasChildren ? this._nodeRadius : this._leafRadius;
@@ -93,8 +93,8 @@ export default class Branch {
     context.stroke();
 
     context.fillStyle = this.hasChildren
-      ? Color.WHITE.toRGBA()
-      : this._leafColor.toRGBA();
+      ? Color.WHITE.toCSS()
+      : this._leafColor.toCSS();
 
     context.beginPath();
     context.arc(this._end.x, this._end.y, r, 0, Math.PI * 2);

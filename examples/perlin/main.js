@@ -72,7 +72,7 @@ const draw = function(context) {
 
       let c = new Color(r);
 
-      context.fillStyle = c.toRGBA();
+      context.fillStyle = c.toCSS();
       context.fillRect(
         x * config.SCALE,
         y * config.SCALE,
