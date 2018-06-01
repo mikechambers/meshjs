@@ -8,8 +8,8 @@
 **/
 
 import meshjs from "../../lib/mesh.js";
-import { downloadJSON } from "../../lib/datautils.js";
-import Color from "../../lib/color.js";
+import { downloadJSON } from "../../lib/data/datautils.js";
+import Color from "../../lib/color/color.js";
 
 /************ CONFIG **************/
 

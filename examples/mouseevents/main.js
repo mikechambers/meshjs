@@ -8,8 +8,8 @@
 **/
 
 import meshjs from "../../lib/mesh.js";
-import Circle from "../../lib/circle.js";
-import Color from "../../lib/color.js";
+import Circle from "../../lib/geometry/circle.js";
+import Color from "../../lib/color/color.js";
 
 /************ CONFIG **************/
 
@@ -62,7 +62,7 @@ const click = function(event) {
   console.log("mouseClick", event, position);
 
   let c = new Circle(position, config.RADIUS);
-  c.fillColor = new Color(255, 0, 0, 0.5);
+  c.fillStyle = new Color(255, 0, 0, 0.5);
   c.draw(_context);
 
   meshjs.listen(mousemove, (listenMouseMove = !listenMouseMove));
@@ -73,7 +73,7 @@ const mouseup = function(event) {
   console.log("mouseUp", event, position);
 
   let c = new Circle(position, config.RADIUS * 2);
-  c.fillColor = new Color(0, 0, 255, 0.5);
+  c.fillStyle = new Color(0, 0, 255, 0.5);
   c.draw(_context);
 };
 
@@ -82,7 +82,7 @@ const mousedown = function(event) {
   console.log("mouseDown", event, position);
 
   let c = new Circle(position, config.RADIUS * 2);
-  c.fillColor = new Color(128, 255, 0, 0.5);
+  c.fillStyle = new Color(128, 255, 0, 0.5);
   c.draw(_context);
 };
 
@@ -91,7 +91,7 @@ const mousemove = function(event) {
   console.log("mouseMove", event, position);
 
   let c = new Circle(position, config.RADIUS);
-  c.fillColor = new Color(255, 0, 0);
+  c.fillStyle = new Color(255, 0, 0);
   c.draw(_context);
 };
 

@@ -8,8 +8,8 @@
 **/
 
 import meshjs from "../../lib/mesh.js";
-import Rectangle from "../../lib/rectangle.js";
-import { loadPixelDataFromPathWithBounds } from "../../lib/pixeldata.js";
+import Rectangle from "../../lib/geometry/rectangle.js";
+import { loadPixelDataFromPathWithBounds } from "../../lib/data/pixeldata.js";
 
 /************ CONFIG **************/
 

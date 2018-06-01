@@ -7,7 +7,7 @@
 	Copyright Mike Chambers 2018
 **/
 
-import Gradient, { gradientFromName } from "../../lib/gradient.js";
+import Gradient, { gradientFromName } from "../../lib/color/gradient.js";
 import meshjs from "../../lib/mesh.js";
 
 /************ CONFIG **************/

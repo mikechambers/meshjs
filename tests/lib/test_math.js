@@ -1,4 +1,4 @@
-import * as math from "../../lib/math.js";
+import * as math from "../../lib/math/math.js";
 import { expect } from "chai";
 
 /******* randomIntInclusive ***********/

@@ -8,12 +8,12 @@
 **/
 
 import meshjs from "../../lib/mesh.js";
-import Vector from "../../lib/vector.js";
-import Color from "../../lib/color.js";
+import Vector from "../../lib/math/vector.js";
+import Color from "../../lib/color/color.js";
 import Gradient, {
   randomGradient,
   gradientFromName
-} from "../../lib/gradient.js";
+} from "../../lib/color/gradient.js";
 
 /************ CONFIG **************/
 

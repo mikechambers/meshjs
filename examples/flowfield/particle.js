@@ -1,4 +1,4 @@
-import Vector from "../../lib/vector.js";
+import Vector from "../../lib/math/vector.js";
 
 export default class Particle {
   constructor(bounds, opacity = 1.0) {
@@ -34,16 +34,16 @@ export default class Particle {
     this._acceleration.add(force);
   }
 
-  show(ctx, pixelData) {
+  draw(context, pixelData) {
     let c = pixelData.getColor(this._position);
     c.alpha = this._opacity;
 
-    ctx.strokeStyle = c.toRGBA();
-    ctx.lineWidth = 0.5;
-    ctx.beginPath();
-    ctx.moveTo(this._lastPosition.x, this._lastPosition.y);
-    ctx.lineTo(this._position.x, this._position.y);
-    ctx.stroke();
+    context.strokeStyle = c.toRGBA();
+    context.lineWidth = 0.5;
+    context.beginPath();
+    context.moveTo(this._lastPosition.x, this._lastPosition.y);
+    context.lineTo(this._position.x, this._position.y);
+    context.stroke();
   }
 
   checkEdges() {

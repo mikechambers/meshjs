@@ -8,13 +8,13 @@
 **/
 
 import meshjs from "../../lib/mesh.js";
-import Vector from "../../lib/vector.js";
-import Color from "../../lib/color.js";
+import Vector from "../../lib/math/vector.js";
+import Color from "../../lib/color/color.js";
 import Particle from "./particle.js";
-import { random } from "../../lib/math.js";
-import noise from "../../lib/noise.js";
-import PixelData, { loadPixelDataFromPath } from "../../lib/pixeldata.js";
-import Gradient from "../../lib/gradient.js";
+import { random } from "../../lib/math/math.js";
+import noise from "../../lib/math/noise.js";
+import PixelData, { loadPixelDataFromPath } from "../../lib/data/pixeldata.js";
+import Gradient from "../../lib/color/gradient.js";
 
 /************ CONFIG **************/
 
@@ -137,7 +137,7 @@ const draw = function(context) {
     p.applyForce(force);
 
     p.update();
-    p.show(context, pixelData);
+    p.draw(context, pixelData);
   }
 };
 

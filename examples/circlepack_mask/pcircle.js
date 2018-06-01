@@ -1,4 +1,4 @@
-import Circle from "../../lib/circle.js";
+import Circle from "../../lib/geometry/circle.js";
 
 export default class PCircle extends Circle {
   constructor(x, y_r, r) {
@@ -31,10 +31,10 @@ export default class PCircle extends Circle {
 
     //todo: need to account for stroke size
     if (
-      this._center.x + this._radius + this._strokeSize / 2 >= bounds.width ||
-      this._center.x - this._radius - this._strokeSize / 2 <= bounds.x ||
-      this._center.y + this._radius + this._strokeSize / 2 >= bounds.height ||
-      this._center.y - this._radius - this._strokeSize / 2 <= bounds.y
+      this._center.x + this._radius + this._lineWidth / 2 >= bounds.width ||
+      this._center.x - this._radius - this._lineWidth / 2 <= bounds.x ||
+      this._center.y + this._radius + this._lineWidth / 2 >= bounds.height ||
+      this._center.y - this._radius - this._lineWidth / 2 <= bounds.y
     ) {
       this._hasCollided = true;
       return;
@@ -47,7 +47,7 @@ export default class PCircle extends Circle {
 
       if (
         c.radius + this._radius >=
-        c.center.distance(this._center) + this._boundsPadding - this._strokeSize
+        c.center.distance(this._center) + this._boundsPadding - this._lineWidth
       ) {
         this._hasCollided = true;
         return;

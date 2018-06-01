@@ -1,4 +1,4 @@
-import Color from "../../lib/color.js";
+import Color from "../../lib/color/color.js";
 import { expect } from "chai";
 
 describe("Color constructor : RGB", () => {

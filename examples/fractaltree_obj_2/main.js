@@ -8,14 +8,16 @@
 **/
 
 import meshjs from "../../lib/mesh.js";
-import Vector from "../../lib/vector.js";
-import Circle from "../../lib/circle.js";
-import Color from "../../lib/color.js";
-import { map } from "../../lib/math.js";
+import Vector from "../../lib/math/vector.js";
+import Circle from "../../lib/geometry/circle.js";
+import Color from "../../lib/color/color.js";
+import { map } from "../../lib/math/math.js";
 import Branch from "./branch.js";
-import * as utils from "../../lib/utils.js";
-import ColorPalette, { randomColorPallete } from "../../lib/colorpallete.js";
-import Gradient, { gradientFromName } from "../../lib/gradient.js";
+import * as utils from "../../lib/utils/utils.js";
+import ColorPalette, {
+  randomColorPallete
+} from "../../lib/color/colorpallete.js";
+import Gradient, { gradientFromName } from "../../lib/color/gradient.js";
 
 /************ CONFIG **************/
 
@@ -44,7 +46,7 @@ const config = {
 
   LEAF_COLOR: "#00FF00",
   LEAF_RADIUS: 8,
-  NODE_RADIUS: 3,
+  NODE_RADIUS: 2,
   LEAF_OPACITY: 0.8,
   BRANCH_COLOR: "#EEEEEE",
   GRADIENT_NAME: "ServQuick"

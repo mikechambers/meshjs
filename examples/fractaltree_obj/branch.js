@@ -1,6 +1,6 @@
-import Color from "../../lib/color.js";
-import { random } from "../../lib/math.js";
-import Vector from "../../lib/vector.js";
+import Color from "../../lib/color/color.js";
+import { random } from "../../lib/math/math.js";
+import Vector from "../../lib/math/vector.js";
 
 export default class Branch {
   constructor(start, end) {
@@ -34,24 +34,24 @@ export default class Branch {
     this._branchColor = color;
   }
 
-  draw(ctx) {
-    ctx.strokeStyle = this._branchColor.toRGBA();
-    ctx.lineWidth = 1.0;
-    ctx.beginPath();
-    ctx.moveTo(this._start.x, this._start.y);
-    ctx.lineTo(this._end.x, this._end.y);
-    ctx.stroke();
+  draw(context) {
+    context.strokeStyle = this._branchColor.toRGBA();
+    context.lineWidth = 1.0;
+    context.beginPath();
+    context.moveTo(this._start.x, this._start.y);
+    context.lineTo(this._end.x, this._end.y);
+    context.stroke();
 
-    ctx.fillStyle = this._hasChildren
+    context.fillStyle = this._hasChildren
       ? Color.WHITE.toRGBA()
       : this._leafColor.toRGBA();
-    ctx.moveTo(this._end.x, this._end.y);
+    context.moveTo(this._end.x, this._end.y);
 
     let r = this._hasChildren ? this._nodeRadius : this._leafRadius;
 
-    ctx.arc(this._end.x, this._end.y, r, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.stroke();
+    context.arc(this._end.x, this._end.y, r, 0, Math.PI * 2);
+    context.fill();
+    context.stroke();
   }
 
   get length() {

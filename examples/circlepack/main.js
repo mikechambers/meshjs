@@ -9,13 +9,13 @@
 
 import meshjs from "../../lib/mesh.js";
 import PCircle from "./pcircle.js";
-import { downloadSVG } from "../../lib/datautils.js";
-import * as utils from "../../lib/utils.js";
-import Vector from "../../lib/vector.js";
-import Color from "../../lib/color.js";
-import { randomColorPallete } from "../../lib/colorpallete.js";
-import { randomInt } from "../../lib/math.js";
-import Gradient, { gradientFromName } from "../../lib/gradient.js";
+import { downloadSVG } from "../../lib/data/datautils.js";
+import * as utils from "../../lib/utils/utils.js";
+import Vector from "../../lib/math/vector.js";
+import Color from "../../lib/color/color.js";
+import { randomColorPallete } from "../../lib/color/colorpallete.js";
+import { randomInt } from "../../lib/math/math.js";
+import Gradient, { gradientFromName } from "../../lib/color/gradient.js";
 
 /************ CONFIG **************/
 
@@ -54,7 +54,7 @@ let config = {
   RADIUS: 4,
   BOUNDS_PADDING: 0,
   CIRCLE_BOUNDS_PADDING: 0,
-  STROKE_COLOR: "#FFFFFF",
+  STROKE_COLOR: "#000000",
   FILL_COLOR: "#FFFFFF",
   COLOR_SOURCE: colorSource.PALLETE, // PALLETE, GRADIENT, FILL
   STROKE_SIZE: 4,
@@ -175,10 +175,10 @@ const draw = function(context, frameCount) {
     if (!found) {
       let c = new PCircle(p, config.RADIUS);
       c.boundsPadding = config.CIRCLE_BOUNDS_PADDING;
-      c.strokeColor = Color.fromHex(config.STROKE_COLOR);
-      c.strokeSize = config.STROKE_SIZE;
+      c.strokeStyle = Color.fromHex(config.STROKE_COLOR);
+      c.lineWidth = config.STROKE_SIZE;
 
-      c.fillColor = getColor(p);
+      c.fillStyle = getColor(p);
       circles.push(c);
     }
   }

@@ -9,16 +9,16 @@
 
 import meshjs from "../../lib/mesh.js";
 import PCircle from "./pcircle.js";
-import { downloadSVG } from "../../lib/datautils.js";
-import * as utils from "../../lib/utils.js";
-import Vector from "../../lib/vector.js";
-import Color from "../../lib/color.js";
-import { colorPalleteFromName } from "../../lib/colorpallete.js";
-import { randomInt } from "../../lib/math.js";
-import Gradient from "../../lib/gradient.js";
-import { loadPixelDataFromPathWithBounds } from "../../lib/pixeldata.js";
-import ColorPallete from "../../lib/colorpallete.js";
-import Rectangle from "../../lib/rectangle.js";
+import { downloadSVG } from "../../lib/data/datautils.js";
+import * as utils from "../../lib/utils/utils.js";
+import Vector from "../../lib/math/vector.js";
+import Color from "../../lib/color/color.js";
+import { colorPalleteFromName } from "../../lib/color/colorpallete.js";
+import { randomInt } from "../../lib/math/math.js";
+import Gradient from "../../lib/color/gradient.js";
+import { loadPixelDataFromPathWithBounds } from "../../lib/data/pixeldata.js";
+import ColorPallete from "../../lib/color/colorpallete.js";
+import Rectangle from "../../lib/geometry/rectangle.js";
 
 /************ CONFIG **************/
 
@@ -156,10 +156,10 @@ const draw = function(context, frameCount) {
     if (!found) {
       let c = new PCircle(p, config.RADIUS);
       c.boundsPadding = config.CIRCLE_BOUNDS_PADDING;
-      c.strokeColor = Color.fromHex(config.STROKE_COLOR);
-      c.strokeSize = config.STROKE_SIZE;
+      c.strokeStyle = Color.fromHex(config.STROKE_COLOR);
+      c.lineWidth = config.STROKE_SIZE;
 
-      c.fillColor = getColor(p);
+      c.fillStyle = getColor(p);
       circles.push(c);
     }
   }

@@ -1,5 +1,5 @@
-import Rectangle from "../../lib/rectangle.js";
-import { randomIntInclusive } from "../../lib/math.js";
+import Rectangle from "../../lib/geometry/rectangle.js";
+import { randomIntInclusive } from "../../lib/math/math.js";
 
 export default class PRectangle extends Rectangle {
   constructor(x, y, width, height) {

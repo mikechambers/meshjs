@@ -8,8 +8,8 @@
 **/
 
 import meshjs from "../../lib/mesh.js";
-import noise from "../../lib/noise.js";
-import Color from "../../lib/color.js";
+import noise from "../../lib/math/noise.js";
+import Color from "../../lib/color/color.js";
 
 /************ CONFIG **************/
 

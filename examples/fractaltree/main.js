@@ -8,10 +8,10 @@
 **/
 
 import meshjs from "../../lib/mesh.js";
-import Vector from "../../lib/vector.js";
-import Circle from "../../lib/circle.js";
-import Color from "../../lib/color.js";
-import { map } from "../../lib/math.js";
+import Vector from "../../lib/math/vector.js";
+import Circle from "../../lib/geometry/circle.js";
+import Color from "../../lib/color/color.js";
+import { map } from "../../lib/math/math.js";
 
 /************ CONFIG **************/
 
@@ -47,7 +47,6 @@ const config = {
 let bounds;
 let _context;
 
-let circle;
 let angle = 0;
 
 let mousePosition = new Vector();
@@ -57,17 +56,10 @@ let mousePosition = new Vector();
 const init = function(context) {
   bounds = meshjs.bounds;
   _context = context;
-
-  circle = new Circle(new Vector(-50, -50), 6);
-  circle.fillColor = Color.WHITE;
 };
 
 const draw = function(context, frameCount) {
-  circle.center.x = mousePosition.x;
-  circle.center.y = bounds.height;
-  circle.draw(context);
-
-  angle = map(circle.center.x, 0, bounds.width, 0, Math.PI * 2);
+  angle = map(mousePosition.x, 0, bounds.width, 0, Math.PI * 2);
 
   context.save();
   context.translate(bounds.center.x, bounds.height);
@@ -96,7 +88,7 @@ const branch = function(len) {
 
 const drawLine = function(start, end) {
   _context.beginPath();
-  _context.strokeStyle = config.STROKE_COLOR;
+  _context.strokeStyle = "#FFFFFF";
   _context.lineWidth = config.STROKE_WIDTH;
   _context.moveTo(start.x, start.y);
   _context.lineTo(end.x, end.y);
