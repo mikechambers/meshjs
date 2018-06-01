@@ -57,7 +57,7 @@ let config = {
   FILL_COLOR: "#FFFFFF",
   COLOR_SOURCE: colorSource.PALLETE, // PALLETE, GRADIENT, FILL
   PALLETE_NAME: "Melon Ball Surprise",
-  STROKE_SIZE: 4,
+  STROKE_SIZE: 2,
   DRAW_BY_DEFAULT: true, //hit d key to toggle whether frames are rendered
   INIT_AFTER_COMPLETE: false,
   DOWNLOAD_PNG_ON_COMPLETE: true,
@@ -156,10 +156,10 @@ const draw = function(context, frameCount) {
     if (!found) {
       let c = new PCircle(p, config.RADIUS);
       c.boundsPadding = config.CIRCLE_BOUNDS_PADDING;
-      c.strokeStyle = Color.fromHex(config.STROKE_COLOR);
+      c.strokeColor = Color.fromHex(config.STROKE_COLOR);
       c.lineWidth = config.STROKE_SIZE;
 
-      c.fillStyle = getColor(p);
+      c.fillColor = getColor(p);
       circles.push(c);
     }
   }

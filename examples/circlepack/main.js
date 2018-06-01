@@ -54,7 +54,7 @@ let config = {
   RADIUS: 4,
   BOUNDS_PADDING: 0,
   CIRCLE_BOUNDS_PADDING: 0,
-  STROKE_COLOR: "#000000",
+  STROKE_COLOR: "#FFFFFF",
   FILL_COLOR: "#FFFFFF",
   COLOR_SOURCE: colorSource.PALLETE, // PALLETE, GRADIENT, FILL
   STROKE_SIZE: 4,
@@ -175,10 +175,10 @@ const draw = function(context, frameCount) {
     if (!found) {
       let c = new PCircle(p, config.RADIUS);
       c.boundsPadding = config.CIRCLE_BOUNDS_PADDING;
-      c.strokeStyle = Color.fromHex(config.STROKE_COLOR);
+      c.strokeColor = Color.fromHex(config.STROKE_COLOR);
       c.lineWidth = config.STROKE_SIZE;
 
-      c.fillStyle = getColor(p);
+      c.fillColor = getColor(p);
       circles.push(c);
     }
   }
