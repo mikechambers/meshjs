@@ -8,11 +8,10 @@
   * Rename to indicate its using canvas implementation?
 * Update readme with updated features and getting started
 * if CLEAR_CANVAS is true, should we call clear before calling init?
-* look at using toBlob to download PNG as opposed to data url
 * is there a way to get around to redrawing entire canvas each frame (background color?)
 * confirm that the way we scale is using GPU
-* look into performance of not calling clearRect in clear
 * look more into the ImageSmoothingQuality settings
+* should color properties on shapes use style or color? Currently they are color, becsause they take color and to make it clear that dont take other types (as well as other color formats), but it is a bit confusing moving between style and color
 
 ### Bigger Items
 
@@ -28,6 +27,19 @@
 * Could implement download through an NPM server / node app, but might make ease of getting started too difficult
 * Add support for auto reloading page when files update
 * Rethink config. Most we never change. Maybe have defaults for most and comment those out?
+
+### Motion Classes
+
+In motion subdirectory (should we have subdirectories?)
+
+* Mover
+ * Follower / Chaser / Tracker
+  * PointFollower
+  * MouserFollower
+ * BoundsMover
+
+
+Need to come up with a better base name than mover.
 
 ### Drawing model
 
@@ -77,6 +89,32 @@ Classes
 * line
 * path (contains lines)
 
+we could add some drawing commands on context that know about shapes, and just do the shape draws, but not styles.
+
+i.e.
+
+````javascript
+context.drawRectangle(Rectangle | x, y, width, height);
+context.drawCircle(Circle | x, y, radius);
+context.drawPath(Path);
+context.drawLine(Line | x1, y1, x2,  y2);
+````
+
+We should not mix models. i.e. draw apis, and apis on context. putting them on context doesnt actually save us a ton since we have to support the calls not on context anyways, and it causes a potential issue with canvas adding apis in the future.
+
+So model is to call apis directly on context, or have instances impliment draw(context) apis.
+
+We will make it so all geometry can draw itself, and has appropriate properties to do so:
+
+fillStyle
+lineWidth
+strokeStyle
+(should we impliment end points
+
+All geometry should extend a baseclass that has the properties and an empty draw
+
+
+
 ### Context proxy
 
 Currently, we proxy all calls, and save function closures. We need to make a decision on what the default is.
@@ -120,3 +158,15 @@ We would then have a property on whether we should capture SVG, in which case, w
 * add shortcut to open generated files in new tab instead of downloading
 * what should we name apis we add onto canvas?
   * draw, create, add, render
+
+
+Items that are maintained in canvas drawing state:
+  strokeStyle, fillStyle, globalAlpha, lineWidth, lineCap, lineJoin, miterLimit, lineDashOffset, shadowOffsetX, shadowOffsetY, shadowBlur, shadowColor, filter, globalCompositeOperation, font, textAlign, textBaseline, direction, imageSmoothingEnabled, imageSmoothingQuality.
+
+https://html.spec.whatwg.org/multipage/canvas.html#line-styles
+
+   The current default path is persistent, and can only be reset using the beginPath() method.
+
+   The save() method, when invoked, must push a copy of the current drawing state onto the drawing state stack.
+
+The restore() method, when invoked, must pop the top entry in the drawing state stack, and reset the drawing state it describes. If there is no saved state, then the method must do nothing.
