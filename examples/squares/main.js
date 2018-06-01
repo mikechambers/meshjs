@@ -13,6 +13,7 @@ import Color from "../../lib/color/color.js";
 import ColorPalette, {
   randomColorPallete
 } from "../../lib/color/colorpallete.js";
+import { shuffleArray } from "../../lib/utils/utils.js";
 
 /************ CONFIG **************/
 
@@ -50,10 +51,15 @@ const config = {
   */
   KEY_COMMANDS: {},
 
-  PADDING: 0,
-  FILL_OPACITY: 0.7,
+  PADDING: -20,
+  FILL_OPACITY: 0.8,
   JITTER: true,
-  SCALE: 16
+  JITTER_AMOUNT: 1,
+  SCALE: 80,
+  STROKE_COLOR: "#ffffff",
+  LINE_WIDTH: 0.5,
+  SHUFFLE: false,
+  SHADOW_BLUR: 10
 
   /*********** APP Specific Settings ************/
 };
@@ -77,8 +83,6 @@ const init = function(context) {
   let cols = Math.floor(bounds.width / config.SCALE);
   let rows = Math.floor(bounds.height / config.SCALE);
 
-  let strokeColor = Color.WHITE;
-
   let i = 0;
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
@@ -92,10 +96,20 @@ const init = function(context) {
       r.pad(config.PADDING);
 
       r.fillColor = cp.getRandomColor(config.FILL_OPACITY);
-      r.strokeColor = strokeColor;
+      r.strokeColor = config.STROKE_COLOR;
+      r.lineWidth = config.LINE_WIDTH;
 
       rectangles.push(r);
     }
+  }
+
+  if (config.SHUFFLE) {
+    shuffleArray(rectangles);
+  }
+
+  if (config.SHADOW_BLUR) {
+    context.shadowColor = "black";
+    context.shadowBlur = config.SHADOW_BLUR;
   }
 };
 
@@ -106,7 +120,7 @@ const draw = function(context, frameCount) {
 
   for (let r of rectangles) {
     if (config.JITTER) {
-      r.jitter(1);
+      r.jitter(config.JITTER_AMOUNT);
     }
 
     context.fillStyle = r.fillColor.toCSS();
