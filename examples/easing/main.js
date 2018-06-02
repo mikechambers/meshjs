@@ -11,6 +11,7 @@ import meshjs from "../../lib/mesh.js";
 import * as easing from "../../lib/motion/easing.js";
 import Circle from "../../lib/geometry/circle.js";
 import Vector from "../../lib/math/vector.js";
+import Tween from "../../lib/motion/tween.js";
 
 /************ CONFIG **************/
 
@@ -60,14 +61,17 @@ const init = function(context) {
   let radius = 20;
   circle = new Circle(cBounds.x + radius, cBounds.center.y, radius);
 
-  circle.startPosition = circle.center.clone();
-  circle.destination = new Vector(cBounds.width - radius, cBounds.y);
-  tween = new easing.Tween(circle.startPosition.x, circle.destination.x, 5000);
+  tween = new Tween(
+    circle.center,
+    new Vector(cBounds.width - radius, circle.center.y),
+    2000,
+    easing.cubicInOut
+  );
   tween.start();
 };
 
 const draw = function(context, frameCount) {
-  circle.center.x = tween.update();
+  circle.center = tween.update();
 
   cBounds.draw(context);
   circle.draw(context);
