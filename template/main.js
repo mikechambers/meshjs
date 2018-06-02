@@ -30,32 +30,18 @@ const config = {
   CANVAS_BACKGROUND_COLOR: "#FAFAFA",
 
   //Where video of canvas is recorded
-  RECORD_VIDEO: false,
-
-  /*
-    Custom keyboard commands for project. These will be printed in the console
-    at start. Commands should be in a format like so:
-    KEY_COMMANDS: {
-      g: "Add nodes",
-      b: "Cycle through colors"
-    },
-  */
-  KEY_COMMANDS: {}
-
-  /*********** APP Specific Settings ************/
+  RECORD_VIDEO: false
 };
 
 let bounds;
 
+//called when project is being initialized
 const init = function(context) {
   bounds = meshjs.bounds;
-
-  /******* called when project is being initialized *******/
 };
 
-const draw = function(context, frameCount) {
-  /***** called once per frame ******/
-};
+//called once per frame (if config.ANIMATE is true)
+const draw = function(context, frameCount) {};
 
 window.onload = function() {
   meshjs.init(config, init, draw);
