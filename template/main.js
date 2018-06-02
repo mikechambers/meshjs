@@ -45,13 +45,10 @@ const config = {
   /*********** APP Specific Settings ************/
 };
 
-/************** GLOBAL VARIABLES ************/
-
 let bounds;
-/*************** CODE ******************/
 
 const init = function(context) {
-  bounds = meshj.bounds;
+  bounds = meshjs.bounds;
 
   /******* called when project is being initialized *******/
 };
