@@ -1,5 +1,4 @@
 module.exports = {
-  parser: "babylon",
   printWidth: 80,
   tabWidth: 2,
   useTabs: false,
@@ -7,5 +6,5 @@ module.exports = {
   bracketSpacing: true,
   arrowParens: "always",
   singleQuote: false,
-  proseWrap: true
+  proseWrap: "always"
 };
