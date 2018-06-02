@@ -1,6 +1,7 @@
 ## mesh.js
 
-My personal JavaScript / canvas creative coding framework.
+Creative coding framework with a focus on quick iteration and easy output to
+image and video.
 
 The core philosophy behind the framework is to create a framework focused on
 creative coding for image and video output. It is not useful for web deployment,
