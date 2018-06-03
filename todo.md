@@ -10,6 +10,10 @@
 - if CLEAR_CANVAS is true, should we call clear before calling init?
 - confirm that the way we scale is using GPU
 - look more into the ImageSmoothingQuality settings
+- we can maintain context for the context calls, and then filter out calls which
+  wont have any impact. need to check browser source to see if it is already
+  doing that and if the calls are expansive in general (i.e. fillStyle,
+  slopeStyle, lineWidth)
 
 ### Projects
 
