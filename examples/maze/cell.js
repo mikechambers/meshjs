@@ -5,10 +5,10 @@ import Color from "../../lib/color/color.js";
 import { randomInt } from "../../lib/math/math.js";
 
 export default class Cell extends Drawable {
-  constructor(i, j, bounds, grid, rows, cols) {
+  constructor(col, row, bounds, grid, rows, cols) {
     super();
-    this._j = j;
-    this._i = i;
+    this._row = row;
+    this._col = col;
     this._bounds = bounds;
     this._visited = false;
     this._grid = grid;
@@ -25,14 +25,20 @@ export default class Cell extends Drawable {
       new Line(this._bounds.bottomRight, this._bounds.bottomLeft),
       new Line(this._bounds.bottomLeft, this._bounds.topLeft)
     ];
+
+    for (let line of this._lines) {
+      line.strokeColor = Color.WHITE;
+      line.strokeColor.alpha = 0.0;
+      line.lineWidth = 2.0;
+    }
   }
 
-  get i() {
-    return this._i;
+  get col() {
+    return this._col;
   }
 
-  get j() {
-    return this._j;
+  get row() {
+    return this._row;
   }
 
   get visited() {
@@ -41,6 +47,13 @@ export default class Cell extends Drawable {
 
   set visited(value) {
     this._visited = value;
+
+    if (this._visited) {
+      for (let line of this._lines) {
+        line.strokeColor.alpha = 0.8;
+        //line.lineWidth = 2.0;
+      }
+    }
   }
 
   set isCurrent(value) {
@@ -55,10 +68,10 @@ export default class Cell extends Drawable {
     //rows = j
     //col = i
     let neighbors = [];
-    let top = this._grid[this._getIndex(this._i, this._j - 1)];
-    let right = this._grid[this._getIndex(this._i + 1, this._j)];
-    let bottom = this._grid[this._getIndex(this._i, this._j + 1)];
-    let left = this._grid[this._getIndex(this._i - 1, this._j)];
+    let top = this._grid[this._getIndex(this._col, this._row - 1)];
+    let right = this._grid[this._getIndex(this._col + 1, this._row)];
+    let bottom = this._grid[this._getIndex(this._col, this._row + 1)];
+    let left = this._grid[this._getIndex(this._col - 1, this._row)];
 
     if (top !== undefined && !top.visited) {
       neighbors.push(top);
@@ -84,35 +97,34 @@ export default class Cell extends Drawable {
     }
   }
 
-  _getIndex(i, j) {
-    if (i < 0 || j < 0 || i > this._cols - 1 || j > this._rows - 1) {
+  _getIndex(col, row) {
+    if (col < 0 || row < 0 || col > this._cols - 1 || row > this._rows - 1) {
       return -1;
     }
 
-    return i + j * this._cols;
+    return col + row * this._cols;
   }
 
   draw(context) {
     let fillColor = this._fillColor;
 
-    if (this._visited && !this._isCurrent) {
-      fillColor = new Color(128, 128, 128);
-    }
-
     if (this._isCurrent) {
-      fillColor = new Color(0, 255, 0);
+      fillColor = Color.fromHex("#ff5f5f");
+      //fillColor.alpha = 0.5;
     }
 
     context.fillStyle = fillColor.toCSS();
     //context.strokeStyle = this._strokeColor.toCSS();
     //context.lineWidth = this._lineWidth;
 
-    context.fillRect(
-      this._bounds.x,
-      this._bounds.y,
-      this._bounds.width,
-      this._bounds.height
-    );
+    if (this._isCurrent || !this._visited) {
+      context.fillRect(
+        this._bounds.x,
+        this._bounds.y,
+        this._bounds.width,
+        this._bounds.height
+      );
+    }
 
     if (this._walls[Cell.TOP]) {
       this._lines[Cell.TOP].draw(context);
