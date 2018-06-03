@@ -11,7 +11,7 @@ import meshjs from "../../lib/mesh.js";
 
 /************ CONFIG **************/
 
-const config = {
+let config = {
   //Dimensions that canvas will be rendered at
   RENDER_HEIGHT: 1080,
   RENDER_WIDTH: 1080,
