@@ -10,6 +10,8 @@
 import meshjs from "../../lib/mesh.js";
 import Cell from "./cell.js";
 import Rectangle from "../../lib/geometry/rectangle.js";
+import Gradient, { randomGradient } from "../../lib/color/gradient.js";
+import { randomInt } from "../../lib/math/math.js";
 
 /************ CONFIG **************/
 
@@ -32,10 +34,13 @@ let config = {
   CANVAS_BACKGROUND_COLOR: "#FAFAFA",
 
   //Where video of canvas is recorded
-  RECORD_VIDEO: false,
-  //FPS: 5,
+  RECORD_VIDEO: true,
+  BATCH_CANVAS_CALLS: true,
+  ENABLE_DEBUG: false,
+  //FPS: 1,
+  FILTER_DRAW_COMMANDS: true,
 
-  CELL_WIDTH: 20
+  CELL_WIDTH: 40
 };
 
 let bounds;
@@ -45,6 +50,7 @@ let rows;
 let grid;
 let current;
 let stack;
+let gradient;
 
 //called when project is being initialized
 const init = function(context) {
@@ -52,29 +58,34 @@ const init = function(context) {
   grid = [];
   stack = [];
 
+  gradient = randomGradient(bounds, Gradient.TOP_LEFT_TO_BOTTOM_RIGHT);
+  gradient.create();
+
   cols = Math.floor(bounds.width / config.CELL_WIDTH);
   rows = Math.floor(bounds.height / config.CELL_WIDTH);
 
   //rows = j
   //col = i
-  for (let j = 0; j < rows; j++) {
-    for (let i = 0; i < cols; i++) {
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
       let b = new Rectangle(
-        i * config.CELL_WIDTH,
-        j * config.CELL_WIDTH,
+        col * config.CELL_WIDTH,
+        row * config.CELL_WIDTH,
         config.CELL_WIDTH,
         config.CELL_WIDTH
       );
-      let cell = new Cell(i, j, b, grid, rows, cols);
+      let cell = new Cell(col, row, b, grid, rows, cols);
       grid.push(cell);
     }
   }
 
-  current = grid[0];
+  current = grid[randomInt(0, grid.length)];
 };
 
 //called once per frame (if config.ANIMATE is true)
 const draw = function(context, frameCount) {
+  gradient.draw(context);
+
   for (let cell of grid) {
     cell.draw(context);
   }
@@ -97,12 +108,14 @@ const draw = function(context, frameCount) {
 
     current.isCurrent = false;
     current = cell;
-    current.isCurrent;
+    current.isCurrent = true;
+  } else {
+    current.isCurrent = false;
   }
 };
 
 function removeWalls(a, b) {
-  let x = a.i - b.i;
+  let x = a.col - b.col;
 
   if (x === 1) {
     a.removeWall(Cell.LEFT);
@@ -112,7 +125,7 @@ function removeWalls(a, b) {
     b.removeWall(Cell.LEFT);
   }
 
-  let y = a.j - b.j;
+  let y = a.row - b.row;
 
   if (y === 1) {
     a.removeWall(Cell.TOP);
