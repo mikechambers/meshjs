@@ -40,7 +40,7 @@ let config = {
   //FPS: 1,
   FILTER_DRAW_COMMANDS: true,
 
-  CELL_WIDTH: 40
+  CELL_WIDTH: 20
 };
 
 let bounds;
