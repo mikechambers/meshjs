@@ -84,14 +84,15 @@ printed to the console when the project starts.
 The following keyboard shortcuts are built in (currently no way to disable via
 API).
 
-| Key(s)      |                       Function                        |
-| ----------- | :---------------------------------------------------: |
-| SHIFT-P     |                     Download PNG                      |
-| SHIFT-V     | Download Video (if enabled via _config.RECORD_VIDEO_) |
-| SHIFT-J     |           Download Settings as a JSON file            |
-| SHIFT-SPACE |                    Pause / Resume                     |
-| SHIFT-R     |               Pause / Resume Rendering                |
-| SHIFT-I     |                     Rerun init()                      |
+|      Key(s) | Function                                              |
+| ----------: | :---------------------------------------------------- |
+|     SHIFT-P | Download PNG                                          |
+|     SHIFT-V | Download Video (if enabled via _config.RECORD_VIDEO_) |
+|     SHIFT-J | Download Settings as a JSON file                      |
+| SHIFT-SPACE | Pause / Resume                                        |
+|     SHIFT-R | Pause / Resume Rendering                              |
+|     SHIFT-I | Rerun init()                                          |
+|     SHIFT-F | Run in Fullscreen                                     |
 
 In addition, you can define your own key combinations in the config, which will
 then automatically be included in the console print out.
