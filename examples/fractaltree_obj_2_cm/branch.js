@@ -1,7 +1,7 @@
 import Color from "../../lib/color/color.js";
 import { random } from "../../lib/math/math.js";
 import Vector from "../../lib/math/vector.js";
-import { pointOnCircle, pointOnLine } from "../../lib/utils.js";
+import { pointOnCircle, pointOnLine } from "../../lib/utils/utils.js";
 
 export default class Branch {
   constructor(start, end) {

@@ -13,8 +13,10 @@ import Circle from "../../lib/geometry/circle.js";
 import Color from "../../lib/color/color.js";
 import { map } from "../../lib/math/math.js";
 import Branch from "./branch.js";
-import * as utils from "../../lib/utils.js";
-import ColorPalette, { randomColorPallete } from "../../lib/color/colorpallete.js";
+import * as utils from "../../lib/utils/utils.js";
+import ColorPalette, {
+  randomColorPallete
+} from "../../lib/color/colorpallete.js";
 import Gradient, { gradientFromName } from "../../lib/color/gradient.js";
 
 /************ CONFIG **************/
