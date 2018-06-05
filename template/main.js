@@ -29,7 +29,7 @@ let config = {
   //background color for display and offscreen canvas
   CANVAS_BACKGROUND_COLOR: "#FAFAFA",
 
-  //Where video of canvas is recorded
+  //whether video of canvas is recorded
   RECORD_VIDEO: false
 };
 
