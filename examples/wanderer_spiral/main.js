@@ -36,14 +36,12 @@ const config = {
   CLEAR_CANVAS: false,
 
   /*** project specific ***/
-  WANDERER_COUNT: 2000,
+  WANDERER_COUNT: 20,
   STROKE_OPACITY: 0.5,
   MOVEMENT_SCALE: 10,
-  START_RANDOM: true,
+  START_RANDOM: false,
   FADE_FROM_CENTER: false,
-  DEFAULT_RADIUS: 60,
-  TEMPLATE: "mask.gif",
-  USE_TEMPLATE: true
+  DEFAULT_RADIUS: 60
 };
 
 /************** GLOBAL VARIABLES ************/
@@ -51,10 +49,11 @@ const config = {
 let bounds;
 
 let wanderers;
-let pd;
 let maxDistance;
 let pixels;
 let startPixels;
+
+let gradient;
 /*************** CODE ******************/
 
 const init = function(context) {
@@ -64,23 +63,17 @@ const init = function(context) {
 
   meshjs.canvas.clear();
 
-  let gradient = randomGradient(bounds, Gradient.TOP_TO_BOTTOM);
+  gradient = randomGradient(bounds, Gradient.TOP_TO_BOTTOM);
   //let gradient = gradientFromName("By Design", bounds, Gradient.TOP_TO_BOTTOM);
   config.GRADIENT_NAME = gradient.name;
   console.log(gradient.name);
   gradient.create();
 
-  pd = gradient.pixelData;
-  pd.cache();
-
   startPixels = bounds.randomPoints(config.WANDERER_COUNT);
-
   wanderers = [];
 
   for (let i = 0; i < config.WANDERER_COUNT; i++) {
-    let v = config.START_RANDOM
-      ? startPixels[randomInt(startPixels.length)]
-      : bounds.center.clone();
+    let v = config.START_RANDOM ? startPixels[i] : bounds.center.clone();
 
     let w = new Wanderer(v, config.DEFAULT_RADIUS);
     w.movementScale = config.MOVEMENT_SCALE;
@@ -95,11 +88,8 @@ const draw = function(context, frameCount) {
       continue;
     }
 
-    let c = pixels.getColor(w.position);
-    if (config.USE_TEMPLATE) {
-      w.strokeColor.alpha = c.isEqualTo(Color.WHITE) ? 0.6 : 0.1;
-      w.draw(context);
-    }
+    w.strokeColor = gradient.getColor(w.position, config.STROKE_OPACITY);
+    w.draw(context);
 
     if (!bounds.containsPoint(w.position)) {
       w.done = true;
@@ -109,14 +99,5 @@ const draw = function(context, frameCount) {
 };
 
 window.onload = function() {
-  loadPixelDataFromPathWithBounds(
-    config.TEMPLATE,
-    function(pd) {
-      pixels = pd;
-      startPixels = pixels.filter(Color.WHITE);
-      pixels.cache();
-      meshjs.init(config, init, draw);
-    },
-    new Rectangle(0, 0, config.RENDER_WIDTH, config.RENDER_HEIGHT)
-  );
+  meshjs.init(config, init, draw);
 };
