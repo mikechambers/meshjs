@@ -14,6 +14,13 @@
   wont have any impact. need to check browser source to see if it is already
   doing that and if the calls are expansive in general (i.e. fillStyle,
   slopeStyle, lineWidth)
+- when paused, and init is called should we then call draw once?
+- instead of redrawing canvas, would it be faster to just delete it and create a
+  new one? you would have to somehow copy context over.
+- look into rounding coordinates for draw commands
+- vector random should take a range
+- do a pass on config names to be more consistent -maybe remove promise stuff.
+  too complicated and you can workaround
 
 ### Projects
 

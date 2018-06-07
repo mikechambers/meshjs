@@ -15,7 +15,10 @@ import Gradient, {
   gradientFromName
 } from "../../lib/color/gradient.js";
 
-import { map } from "../../lib/math/math.js";
+import Wanderer from "./wanderer.js";
+import Rectangle from "../../lib/geometry/rectangle.js";
+import { loadPixelDataFromPathWithBounds } from "../../lib/data/pixeldata.js";
+import { randomInt } from "../../lib/math/math.js";
 
 /************ CONFIG **************/
 
@@ -33,11 +36,14 @@ const config = {
   CLEAR_CANVAS: false,
 
   /*** project specific ***/
-  WANDERER_COUNT: 20,
-  STROKE_OPACITY: 0.3,
-  MOVEMENT_SCALE: 8,
-  START_RANDOM: false,
-  FADE_FROM_CENTER: false
+  WANDERER_COUNT: 2000,
+  STROKE_OPACITY: 0.5,
+  MOVEMENT_SCALE: 10,
+  START_RANDOM: true,
+  FADE_FROM_CENTER: false,
+  DEFAULT_RADIUS: 60,
+  TEMPLATE: "mask.gif",
+  USE_TEMPLATE: true
 };
 
 /************** GLOBAL VARIABLES ************/
@@ -47,12 +53,14 @@ let bounds;
 let wanderers;
 let pd;
 let maxDistance;
+let pixels;
+let startPixels;
 /*************** CODE ******************/
 
 const init = function(context) {
   bounds = meshjs.bounds;
 
-  maxDistance = bounds.center.distance(new Vector(bounds.x, bounds.center.y));
+  //maxDistance = bounds.center.distance(new Vector(bounds.x, bounds.center.y));
 
   meshjs.canvas.clear();
 
@@ -65,51 +73,50 @@ const init = function(context) {
   pd = gradient.pixelData;
   pd.cache();
 
+  startPixels = bounds.randomPoints(config.WANDERER_COUNT);
+
   wanderers = [];
 
   for (let i = 0; i < config.WANDERER_COUNT; i++) {
-    let v = config.START_RANDOM ? bounds.randomPoint() : bounds.center.clone();
+    let v = config.START_RANDOM
+      ? startPixels[randomInt(startPixels.length)]
+      : bounds.center.clone();
 
-    wanderers.push(v);
+    let w = new Wanderer(v, config.DEFAULT_RADIUS);
+    w.movementScale = config.MOVEMENT_SCALE;
+    w.strokeColor.alpha = config.STROKE_OPACITY;
+    wanderers.push(w);
   }
 };
 
 const draw = function(context, frameCount) {
-  for (let position of wanderers) {
-    if (position.done) {
+  for (let w of wanderers) {
+    if (w.done) {
       continue;
     }
 
-    context.beginPath();
-    context.moveTo(position.x, position.y);
-
-    let v = Vector.createRandom();
-    v.multiply(config.MOVEMENT_SCALE);
-    position.add(v);
-
-    let strokeColor;
-
-    if (config.FADE_FROM_CENTER) {
-      let distance = position.distance(bounds.center);
-
-      let alpha = 1 - map(distance, 0, maxDistance, 0, 0.5);
-      strokeColor = pd.getColor(position, alpha);
-    } else {
-      strokeColor = pd.getColor(position, config.STROKE_OPACITY);
+    let c = pixels.getColor(w.position);
+    if (config.USE_TEMPLATE) {
+      w.strokeColor.alpha = c.isEqualTo(Color.WHITE) ? 0.6 : 0.1;
+      w.draw(context);
     }
 
-    context.strokeStyle = strokeColor.toCSS();
-
-    if (!bounds.containsPoint(position)) {
-      position.done = true;
+    if (!bounds.containsPoint(w.position)) {
+      w.done = true;
       continue;
     }
-
-    context.lineTo(position.x, position.y);
-    context.stroke();
   }
 };
 
 window.onload = function() {
-  meshjs.init(config, init, draw);
+  loadPixelDataFromPathWithBounds(
+    config.TEMPLATE,
+    function(pd) {
+      pixels = pd;
+      startPixels = pixels.filter(Color.WHITE);
+      pixels.cache();
+      meshjs.init(config, init, draw);
+    },
+    new Rectangle(0, 0, config.RENDER_WIDTH, config.RENDER_HEIGHT)
+  );
 };

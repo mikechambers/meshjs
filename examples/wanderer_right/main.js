@@ -15,7 +15,7 @@ import Gradient, {
   gradientFromName
 } from "../../lib/color/gradient.js";
 
-import { map } from "../../lib/math/math.js";
+import { map, randomInt } from "../../lib/math/math.js";
 
 /************ CONFIG **************/
 
@@ -29,13 +29,14 @@ const config = {
   BACKGROUND_COLOR: "#ffffff", //background color of html page
   //background color for display and offscreen canvas
   CANVAS_BACKGROUND_COLOR: "#FAFAFA", //efefef fefefe
-  RECORD_VIDEO: false,
+  RECORD_VIDEO: true,
+  BATCH_CANVAS_CALLS: true,
   CLEAR_CANVAS: false,
 
   /*** project specific ***/
-  WANDERER_COUNT: 20,
+  WANDERER_COUNT: 100,
   STROKE_OPACITY: 0.3,
-  MOVEMENT_SCALE: 8,
+  MOVEMENT_SCALE: 10,
   START_RANDOM: false,
   FADE_FROM_CENTER: false
 };
@@ -83,9 +84,29 @@ const draw = function(context, frameCount) {
     context.beginPath();
     context.moveTo(position.x, position.y);
 
-    let v = Vector.createRandom();
-    v.multiply(config.MOVEMENT_SCALE);
-    position.add(v);
+    let dir = randomInt(0, 4);
+
+    let x = 0;
+    let y = 0;
+    switch (dir) {
+      case 0:
+        x = config.MOVEMENT_SCALE;
+        break;
+      case 1:
+        x = -config.MOVEMENT_SCALE;
+        break;
+      case 2:
+        y = config.MOVEMENT_SCALE;
+        break;
+      case 3:
+        y = -config.MOVEMENT_SCALE;
+        break;
+    }
+
+    position.x += x;
+    position.y += y;
+
+    //config.MOVEMENT_SCALE
 
     let strokeColor;
 
