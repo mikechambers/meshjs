@@ -66,7 +66,7 @@ const init = function(context) {
     mover = new BoundsMover(
       bounds,
       points[i],
-      Vector.createRandom(-1,1).multiply(5)
+      Vector.createRandomVelocity().multiply(5)
     );
     mover.circle = new Circle(mover.position, config.DEFAULT_RADIUS);
 
