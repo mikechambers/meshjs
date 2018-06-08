@@ -126,7 +126,7 @@ const draw = function(context, frameCount) {
     count = 1000;
   }
 
-  let points = getRandomPoints(count);
+  let points = getgetRandomPoints(count);
 
   for (let p of points) {
     if (
@@ -207,7 +207,7 @@ const getColor = function(point) {
   return c;
 };
 
-const getRandomPoints = function(count) {
+const getgetRandomPoints = function(count) {
   if (pixels.length == 0) {
     console.log("render complete");
     meshjs.setPaused(true);

@@ -59,7 +59,7 @@ const init = function(context) {
 
   cp = randomColorPallete();
 
-  let points = bounds.randomPoints(config.CIRLCE_COUNT);
+  let points = bounds.getRandomPoints(config.CIRLCE_COUNT);
   movers = [];
 
   for (let i = 0; i < config.CIRLCE_COUNT; i++) {

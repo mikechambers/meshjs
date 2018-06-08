@@ -69,7 +69,7 @@ const init = function(context) {
   console.log(gradient.name);
   gradient.create();
 
-  startPixels = bounds.randomPoints(config.WANDERER_COUNT);
+  startPixels = bounds.getRandomPoints(config.WANDERER_COUNT);
   wanderers = [];
 
   for (let i = 0; i < config.WANDERER_COUNT; i++) {

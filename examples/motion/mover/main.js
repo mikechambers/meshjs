@@ -46,7 +46,7 @@ let movers;
 const init = function(context) {
   bounds = meshjs.bounds;
 
-  let points = bounds.randomPoints(100);
+  let points = bounds.getRandomPoints(100);
   movers = [];
 
   for (let i = 0; i < points.length; i++) {
