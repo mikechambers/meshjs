@@ -7,10 +7,10 @@
 	Copyright Mike Chambers 2018
 **/
 
-import meshjs from "../../lib/mesh.js";
-import Mover from "../../lib/motion/mover.js";
-import Rectangle from "../../lib/geometry/rectangle.js";
-import Vector from "../../lib/math/vector.js";
+import meshjs from "../../../lib/mesh.js";
+import Mover from "../../../lib/motion/mover.js";
+import Rectangle from "../../../lib/geometry/rectangle.js";
+import Vector from "../../../lib/math/vector.js";
 
 /************ CONFIG **************/
 
