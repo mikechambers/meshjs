@@ -35,8 +35,8 @@ let config = {
 
   //Where video of canvas is recorded
   RECORD_VIDEO: true,
-  BATCH_CANVAS_CALLS: true,
-  ENABLE_DEBUG: false,
+  BATCH_DRAW_COMMANDS: true,
+  DEBUG_DRAW_COMMANDS: false,
   //FPS: 1,
   FILTER_DRAW_COMMANDS: true,
 

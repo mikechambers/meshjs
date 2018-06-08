@@ -30,7 +30,7 @@ const config = {
   //background color for display and offscreen canvas
   CANVAS_BACKGROUND_COLOR: "#FAFAFA", //efefef fefefe
   RECORD_VIDEO: true,
-  BATCH_CANVAS_CALLS: true,
+  BATCH_DRAW_COMMANDS: true,
   CLEAR_CANVAS: false,
 
   /*** project specific ***/

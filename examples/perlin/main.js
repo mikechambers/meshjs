@@ -22,7 +22,7 @@ const config = {
   MAX_DISPLAY_HEIGHT: 640,
   MAX_DISPLAY_WIDTH: 640,
 
-  BATCH_CANVAS_CALLS: false,
+  BATCH_DRAW_COMMANDS: false,
 
   //background color of html page
   BACKGROUND_COLOR: "#000000",

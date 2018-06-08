@@ -37,8 +37,8 @@ let config = {
   //whether video of canvas is recorded
   RECORD_VIDEO: true,
 
-  ENABLE_DEBUG: false,
-  BATCH_CANVAS_CALLS: true,
+  DEBUG_DRAW_COMMANDS: false,
+  BATCH_DRAW_COMMANDS: true,
   FILTER_DRAW_COMMANDS: true,
 
   SCALE: 40,

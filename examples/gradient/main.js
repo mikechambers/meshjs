@@ -18,11 +18,11 @@ const config = {
   RENDER_WIDTH: 1920,
 
   //whether canvas calls are batched and executed at once, or as they are made
-  BATCH_CANVAS_CALLS: false,
+  BATCH_DRAW_COMMANDS: false,
 
   //whether to output debug information (currently just for)
   //canvas rendering.
-  ENABLE_DEBUG: false,
+  DEBUG_DRAW_COMMANDS: false,
 
   //Max dimension canvas will be display at on page
   //note, exact dimension will depend on RENDER_HEIGHT / width and
