@@ -83,8 +83,7 @@ const draw = function(context, frameCount) {
     context.beginPath();
     context.moveTo(position.x, position.y);
 
-    let v = Vector.createRandom();
-    v.multiply(config.MOVEMENT_SCALE);
+    let v = Vector.createRandom(-config.MOVEMENT_SCALE, config.MOVEMENT_SCALE);
     position.add(v);
 
     let strokeColor;

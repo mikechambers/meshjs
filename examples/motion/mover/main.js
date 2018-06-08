@@ -50,7 +50,7 @@ const init = function(context) {
   movers = [];
 
   for (let i = 0; i < points.length; i++) {
-    mover = new Mover(points[i], Vector.createRandom(1));
+    mover = new Mover(points[i], Vector.createRandom(-1,1));
     mover.rectangle = new Rectangle(mover.position, 20, 10);
     mover.draw = function(context) {
       this.rectangle.position = this.position;

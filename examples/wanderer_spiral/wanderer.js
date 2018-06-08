@@ -21,7 +21,7 @@ export default class Wanderer extends Drawable {
       return;
     }
 
-    let v = Vector.createRandom(this._movementScale);
+    let v = Vector.createRandom(-this._movementScale, this._movementScale);
     this._position.add(v);
     this._angle += this._stepSize;
 
