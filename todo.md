@@ -19,8 +19,15 @@
   new one? you would have to somehow copy context over.
 - look into rounding coordinates for draw commands
 - vector random should take a range
-- do a pass on config names to be more consistent -maybe remove promise stuff.
-  too complicated and you can workaround
+- do a pass on config names to be more consistent
+- maybe remove promise stuff. too complicated and you can workaround
+- should we have vector method that act on themselves, return themselves, so we
+  can more easily chaing them?
+- rename Rectangle randomPoints
+- Make vector createRandom take a range
+- change clone to copy?
+- need to make sure rectangle center is returning correct value (center relative
+  to canvas)
 
 ### Projects
 
