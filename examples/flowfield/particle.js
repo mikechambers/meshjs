@@ -27,7 +27,7 @@ export default class Particle {
   }
 
   _updateLastPosition() {
-    this._lastPosition = this._position.clone();
+    this._lastPosition = this._position.copy();
   }
 
   applyForce(force) {

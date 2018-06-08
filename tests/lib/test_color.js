@@ -222,10 +222,10 @@ describe("toHex", () => {
   });
 });
 
-describe("clone", () => {
-  it("clone returns an equivilant copy", () => {
+describe("copy", () => {
+  it("copy returns an equivilant copy", () => {
     let c = new Color(27, 88, 254, 0.8);
-    let c2 = c.clone();
+    let c2 = c.copy();
     expect(c.isEqualTo(c2)).to.equal(true);
     expect(c.isEqualTo(c2, true)).to.equal(true);
     expect(c === c2).to.equal(false);

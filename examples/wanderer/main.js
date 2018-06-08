@@ -68,7 +68,7 @@ const init = function(context) {
   wanderers = [];
 
   for (let i = 0; i < config.WANDERER_COUNT; i++) {
-    let v = config.START_RANDOM ? bounds.randomPoint() : bounds.center.clone();
+    let v = config.START_RANDOM ? bounds.randomPoint() : bounds.center.copy();
 
     wanderers.push(v);
   }

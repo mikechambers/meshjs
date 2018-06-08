@@ -43,7 +43,7 @@ let angle = 0;
 const init = function(context) {
   bounds = meshjs.bounds;
 
-  rectangle = new Rectangle(bounds.center.clone(), 40, 20);
+  rectangle = new Rectangle(bounds.center.copy(), 40, 20);
 };
 
 //called once per frame (if config.ANIMATE is true)

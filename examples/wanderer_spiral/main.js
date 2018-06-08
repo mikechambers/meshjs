@@ -73,7 +73,7 @@ const init = function(context) {
   wanderers = [];
 
   for (let i = 0; i < config.WANDERER_COUNT; i++) {
-    let v = config.START_RANDOM ? startPixels[i] : bounds.center.clone();
+    let v = config.START_RANDOM ? startPixels[i] : bounds.center.copy();
 
     let w = new Wanderer(v, config.DEFAULT_RADIUS);
     w.movementScale = config.MOVEMENT_SCALE;
