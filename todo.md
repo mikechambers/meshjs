@@ -3,29 +3,14 @@
 ### Tweaks
 
 - Need to look at pointOnLine (try to figure out why we have to reverse angle)
-- Gradient
-  - Add support for other gradient directions in Gradient class
-  - Rename to indicate its using canvas implementation?
 - Update readme with updated features and getting started
 - if CLEAR_CANVAS is true, should we call clear before calling init?
 - confirm that the way we scale is using GPU
-- look more into the ImageSmoothingQuality settings
-- we can maintain context for the context calls, and then filter out calls which
-  wont have any impact. need to check browser source to see if it is already
-  doing that and if the calls are expansive in general (i.e. fillStyle,
-  slopeStyle, lineWidth)
 - when paused, and init is called should we then call draw once?
-- instead of redrawing canvas, would it be faster to just delete it and create a
-  new one? you would have to somehow copy context over.
 - look into rounding coordinates for draw commands
-- vector random should take a range
-- do a pass on config names to be more consistent
 - maybe remove promise stuff. too complicated and you can workaround
-- rename Rectangle randomPoints
-- Make vector createRandom take a range
-- change clone to copy?
-- need to make sure rectangle center is returning correct value (center relative
-  to canvas)
+- rename geometry folder
+- add config to snap to pixels in context draw commands
 
 ### Projects
 
@@ -33,6 +18,9 @@
 - add a map function that lets you specify the easing equation?
 - add color lerp?
 - Motion classes (see below)
+- Gradient
+  - Add support for other gradient directions in Gradient class
+  - Rename to indicate its using canvas implementation?
 
 ### Bigger Items
 
