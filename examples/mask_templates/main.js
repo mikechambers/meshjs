@@ -36,7 +36,7 @@ const config = {
   FPS: 60,
 
   //Where video of canvas is recorded
-  RECORD_VIDEO: false,
+  CAPTURE_VIDEO: false,
 
   //whether canvas should be cleared prior to each call to draw
   CLEAR_CANVAS: false,

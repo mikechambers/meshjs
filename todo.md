@@ -12,6 +12,12 @@
 - rename geometry folder
 - add config to snap to pixels in context draw commands
 
+### SVG export
+
+- can we capture svg if not batching?
+- capture path sent to stroke / etc
+- need to explicitly split out opacity calls to support illustrator
+
 ### Projects
 
 - Fill out Tween class and Tween manager class

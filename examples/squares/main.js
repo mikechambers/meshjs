@@ -36,7 +36,7 @@ const config = {
   CANVAS_BACKGROUND_COLOR: "#FAFAFA",
 
   //Where video of canvas is recorded
-  RECORD_VIDEO: true,
+  CAPTURE_VIDEO: true,
 
   //whether canvas should be cleared prior to each call to draw
   CLEAR_CANVAS: true,

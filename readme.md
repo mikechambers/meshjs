@@ -18,7 +18,7 @@ rather provide apis around it useful for creative coding.
 - Config object based configuration, making it easy to quickly iterate, and save
   settings.
 - Built in functionality for saving PNGs (hit "p") and videos (hit "v" when
-  config.RECORD_VIDEO is set to true).
+  config.CAPTURE_VIDEO is set to true).
 - Automatic support for rendering canvas at high resolution, but displaying at
   smaller size.
 - APIs to make it easy to grab and use pixel data / colors from images and
@@ -87,7 +87,7 @@ API).
 |      Key(s) | Function                                              |
 | ----------: | :---------------------------------------------------- |
 |     SHIFT-P | Download PNG                                          |
-|     SHIFT-V | Download Video (if enabled via _config.RECORD_VIDEO_) |
+|     SHIFT-V | Download Video (if enabled via _config.CAPTURE_VIDEO_) |
 |     SHIFT-J | Download Settings as a JSON file                      |
 | SHIFT-SPACE | Pause / Resume                                        |
 |     SHIFT-R | Pause / Resume Rendering                              |

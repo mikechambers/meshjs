@@ -8,6 +8,7 @@
 **/
 
 import meshjs from "../../lib/mesh.js";
+import Color from "../../lib/color/color.js";
 
 /************ CONFIG **************/
 
@@ -27,10 +28,14 @@ let config = {
   BACKGROUND_COLOR: "#EEEEEE",
 
   //background color for display and offscreen canvas
-  CANVAS_BACKGROUND_COLOR: "#FAFAFA",
+  CANVAS_BACKGROUND_COLOR: "#FFFF00",
 
   //whether video of canvas is recorded
-  RECORD_VIDEO: false
+  CAPTURE_VIDEO: false,
+  ANIMATE: false,
+
+  BATCH_DRAW_COMMANDS: true,
+  CAPTURE_SVG: true
 };
 
 let bounds;
@@ -38,6 +43,27 @@ let bounds;
 //called when project is being initialized
 const init = function(context) {
   bounds = meshjs.bounds;
+
+  let red = new Color(255, 0, 0, 0.5);
+  context.lineWidth = 6;
+  context.strokeStyle = red.toCSS();
+  context.beginPath();
+  context.moveTo(bounds.center.x, bounds.center.y);
+  context.lineTo(100, 100);
+  context.stroke();
+
+  context.lineWidth = 2;
+  context.strokeStyle = "#00FF00";
+
+  context.moveTo(100, 100);
+  context.lineTo(900, 900);
+  context.stroke();
+
+  context.strokeStyle = "#0000FF";
+  context.beginPath();
+  context.moveTo(900, 100);
+  context.lineTo(900, 900);
+  context.stroke();
 };
 
 //called once per frame (if config.ANIMATE is true)

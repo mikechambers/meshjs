@@ -34,7 +34,7 @@ const config = {
   CANVAS_BACKGROUND_COLOR: "#222222",
 
   //Where video of canvas is recorded
-  RECORD_VIDEO: true,
+  CAPTURE_VIDEO: true,
 
   /*********** APP Specific Settings ************/
   STROKE_COLOR: "#FFFFFF",

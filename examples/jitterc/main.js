@@ -35,7 +35,7 @@ let config = {
   CANVAS_BACKGROUND_COLOR: "#FAFAFA",
 
   //whether video of canvas is recorded
-  RECORD_VIDEO: true,
+  CAPTURE_VIDEO: true,
 
   DEBUG_DRAW_COMMANDS: false,
   BATCH_DRAW_COMMANDS: true,

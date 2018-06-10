@@ -34,7 +34,7 @@ const config = {
   CANVAS_BACKGROUND_COLOR: "#FAFAFA",
 
   //Where video of canvas is recorded
-  RECORD_VIDEO: false,
+  CAPTURE_VIDEO: false,
 
   CLEAR_CANVAS: false,
 
