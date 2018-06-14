@@ -42,6 +42,8 @@ const config = {
   //Where video of canvas is recorded
   CAPTURE_VIDEO: false,
 
+  CAPTURE_SVG: true,
+
   /*********** APP Specific Settings ************/
 
   LEAF_COLOR: "#00FF00",

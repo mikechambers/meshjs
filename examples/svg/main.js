@@ -9,6 +9,9 @@
 
 import meshjs from "../../lib/mesh.js";
 import Color from "../../lib/color/color.js";
+import Circle from "../../lib/geometry/circle.js";
+import Rectangle from "../../lib/geometry/rectangle.js";
+import Vector from "../../lib/math/vector.js";
 
 /************ CONFIG **************/
 
@@ -64,6 +67,21 @@ const init = function(context) {
   context.moveTo(900, 100);
   context.lineTo(900, 900);
   context.stroke();
+
+  let c = new Circle(bounds.center.copy(), 50);
+  c.draw(context);
+
+  let c2 = new Circle(new Vector(200, 600), 75);
+  c2.fillColor = new Color(255, 0, 0, 0.5);
+  c2.lineWidth = 10;
+  c2.strokeColor = new Color(0, 0, 255, 0.5);
+  c2.draw(context);
+
+  let r = new Rectangle(600, 600, 100, 50);
+  r.strokeColor = new Color(255, 255, 0);
+  r.fillColor = new Color(128, 128, 0, 0.5);
+  r.lineWidth = 5.0;
+  r.draw(context);
 };
 
 //called once per frame (if config.ANIMATE is true)

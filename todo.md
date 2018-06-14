@@ -8,15 +8,23 @@
 - confirm that the way we scale is using GPU
 - when paused, and init is called should we then call draw once?
 - look into rounding coordinates for draw commands
-- maybe remove promise stuff. too complicated and you can workaround
+- remove promise stuff. too complicated and you can workaround
 - rename geometry folder
 - add config to snap to pixels in context draw commands
+- maybe just remove non-batched rendering. would significantly simplify code,
+  but would remove option if we needed to try to optimize for performance
+- if capture SVG on, then automatically set batch
 
 ### SVG export
 
 - can we capture svg if not batching?
 - capture path sent to stroke / etc
 - need to explicitly split out opacity calls to support illustrator
+- changes to global alpha will change opacity of items
+- miterLimits default are different for canvas (10) and svg (4)
+- add a draw circle command on context, so we know when a circle is drawn and
+  can do to write thing for SVG
+- dont worry about making a general svg exporter
 
 ### Projects
 

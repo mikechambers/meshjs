@@ -245,10 +245,7 @@ const createSVG = function() {
 };
 
 const keypress = function(event) {
-  if (event.key === "s") {
-    let svg = createSVG();
-    downloadSVG(svg, config.PROJECT_NAME);
-  } else if (event.key === "d") {
+  if (event.key === "d") {
     _doDraw = !_doDraw;
   }
 };
