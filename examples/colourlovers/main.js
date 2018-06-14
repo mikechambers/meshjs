@@ -35,7 +35,7 @@ const config = {
   ANIMATE: false,
 
   //Where video of canvas is recorded
-  RECORD_VIDEO: false
+  CAPTURE_VIDEO: false
 
   /*********** APP Specific Settings ************/
 };

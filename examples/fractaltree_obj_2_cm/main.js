@@ -40,7 +40,7 @@ const config = {
   CANVAS_BACKGROUND_COLOR: "#222222",
 
   //Where video of canvas is recorded
-  RECORD_VIDEO: false,
+  CAPTURE_VIDEO: false,
 
   KEY_COMMANDS: {
     g: "Add nodes",

@@ -32,7 +32,7 @@ let config = {
   CANVAS_BACKGROUND_COLOR: "#FAFAFA",
 
   //whether video of canvas is recorded
-  RECORD_VIDEO: false
+  CAPTURE_VIDEO: false
 };
 
 let bounds;

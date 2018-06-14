@@ -29,7 +29,7 @@ const config = {
   BACKGROUND_COLOR: "#ffffff", //background color of html page
   //background color for display and offscreen canvas
   CANVAS_BACKGROUND_COLOR: "#FAFAFA", //efefef fefefe
-  RECORD_VIDEO: true,
+  CAPTURE_VIDEO: true,
   BATCH_DRAW_COMMANDS: true,
   CLEAR_CANVAS: false,
 
