@@ -10,7 +10,7 @@
 import meshjs from "../../lib/mesh.js";
 import * as utils from "../../lib/utils/utils.js";
 import Circle from "../../lib/geometry/circle.js";
-import Segment from "./segment.js";
+import Segment from "../../lib/geometry/segment.js";
 import Color from "../../lib/color/color.js";
 
 /************ CONFIG **************/
@@ -37,11 +37,12 @@ let config = {
   CAPTURE_VIDEO: false,
   ANIMATE: false,
 
-  MAIN_RADIUS: 300,
+  MAIN_RADIUS: 500,
   POINT_RADIUS: 10,
-  SEGMENT_COUNT: 5000,
-  MIN_DISTANCE: 10,
-  SEGMENT_OPACITY: 0.1
+  SEGMENT_COUNT: 100,
+  MIN_DISTANCE: 900,
+  SEGMENT_OPACITY: 1.0,
+  END_POINT_RADIUS: 3
 };
 
 let bounds;
@@ -69,7 +70,29 @@ const init = function(context) {
     }
 
     let s = new Segment(p1, p2);
+
+    let min = 100000;
+    let p;
+    for (let segment of segments) {
+      let v = utils.getSegmentIntersection(s, segment);
+
+      if (v === undefined) {
+        continue;
+      }
+
+      let dist = v.distance(s.p1);
+      if (dist < min) {
+        min = dist;
+        p = v;
+      }
+    }
+
+    if (p !== undefined) {
+      s.p2 = p;
+    }
+
     s.strokeColor = new Color(0, 0, 0, config.SEGMENT_OPACITY);
+    s.endPointRadius = config.END_POINT_RADIUS;
     segments.push(s);
   }
 };
