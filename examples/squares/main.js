@@ -40,6 +40,7 @@ const config = {
 
   //whether canvas should be cleared prior to each call to draw
   CLEAR_CANVAS: true,
+  ANIMATE:true,
 
   /*
     Custom keyboard commands for project. These will be printed in the console
@@ -52,14 +53,14 @@ const config = {
   KEY_COMMANDS: {},
 
   PADDING: -20,
-  FILL_OPACITY: 0.8,
+  FILL_OPACITY: 1.0,
   JITTER: true,
   JITTER_AMOUNT: 1,
   SCALE: 80,
   STROKE_COLOR: "#ffffff",
   LINE_WIDTH: 0.5,
   SHUFFLE: false,
-  SHADOW_BLUR: 10
+  SHADOW_BLUR: 20
 
   /*********** APP Specific Settings ************/
 };
@@ -67,7 +68,6 @@ const config = {
 /************** GLOBAL VARIABLES ************/
 
 let bounds;
-
 let rectangles;
 
 /*************** CODE ******************/
@@ -108,12 +108,16 @@ const init = function(context) {
   }
 
   if (config.SHADOW_BLUR) {
-    context.shadowColor = "black";
+    context.shadowColor = "#000000";
     context.shadowBlur = config.SHADOW_BLUR;
   }
 };
 
 const draw = function(context, frameCount) {
+	return;
+	console.log("draw");
+
+
   //see if we can store these
   context.strokeStyle = Color.WHITE.toCSS();
   //context.fillStyle = Color.WHITE.toCSS();

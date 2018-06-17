@@ -17,8 +17,8 @@ import Color from "../../lib/color/color.js";
 
 let config = {
   //Dimensions that canvas will be rendered at
-  RENDER_HEIGHT: 1080,
-  RENDER_WIDTH: 1080,
+  RENDER_HEIGHT: 2520,
+  RENDER_WIDTH: 2520,
 
   //Max dimension canvas will be display at on page
   //note, exact dimension will depend on RENDER_HEIGHT / width and
@@ -37,9 +37,9 @@ let config = {
   CAPTURE_VIDEO: false,
   ANIMATE: false,
 
-  MAIN_RADIUS: 300,
+  MAIN_RADIUS: 1000,
   POINT_RADIUS: 10,
-  SEGMENT_COUNT: 5000,
+  SEGMENT_COUNT: 10000,
   MIN_DISTANCE: 10,
   SEGMENT_OPACITY: 0.1
 };
