@@ -40,7 +40,7 @@ const config = {
 
   //whether canvas should be cleared prior to each call to draw
   CLEAR_CANVAS: true,
-  ANIMATE:true,
+  ANIMATE: true,
 
   /*
     Custom keyboard commands for project. These will be printed in the console
@@ -114,10 +114,6 @@ const init = function(context) {
 };
 
 const draw = function(context, frameCount) {
-	return;
-	console.log("draw");
-
-
   //see if we can store these
   context.strokeStyle = Color.WHITE.toCSS();
   //context.fillStyle = Color.WHITE.toCSS();
