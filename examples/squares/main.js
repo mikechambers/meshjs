@@ -19,8 +19,8 @@ import { shuffleArray } from "../../lib/utils/utils.js";
 
 const config = {
   //Dimensions that canvas will be rendered at
-  RENDER_HEIGHT: 1080,
-  RENDER_WIDTH: 1080,
+  RENDER_HEIGHT: 2520,
+  RENDER_WIDTH: 2520,
 
   //Max dimension canvas will be display at on page
   //note, exact dimension will depend on RENDER_HEIGHT / width and
@@ -56,10 +56,10 @@ const config = {
   FILL_OPACITY: 1.0,
   JITTER: true,
   JITTER_AMOUNT: 1,
-  SCALE: 80,
+  SCALE: 180,
   STROKE_COLOR: "#ffffff",
-  LINE_WIDTH: 0.5,
-  SHUFFLE: false,
+  LINE_WIDTH: 0.0,
+  SHUFFLE: true,
   SHADOW_BLUR: 20
 
   /*********** APP Specific Settings ************/
@@ -124,7 +124,10 @@ const draw = function(context, frameCount) {
     }
 
     context.fillStyle = r.fillColor.toCSS();
-    context.strokeRect(r.x, r.y, r.width, r.height);
+
+	if(config.LINE_WIDTH) {
+    	context.strokeRect(r.x, r.y, r.width, r.height);
+	}
     context.fillRect(r.x, r.y, r.width, r.height);
   }
 };
