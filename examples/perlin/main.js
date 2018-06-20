@@ -51,6 +51,8 @@ let inc = 0.01;
 let zinc = 0.05;
 let zoff;
 
+let _greyMap;
+
 /*************** CODE ******************/
 
 const init = function(context) {
@@ -60,6 +62,13 @@ const init = function(context) {
   cols = Math.floor(bounds.width / config.SCALE);
 
   zoff = Math.random(10000);
+
+  _greyMap = new Map();
+
+  for (let i = 0; i < 256; i++) {
+    let c = new Color(i);
+    _greyMap.set(i, c.toCSS());
+  }
 };
 
 const draw = function(context) {
@@ -70,9 +79,7 @@ const draw = function(context) {
     for (let x = 0; x < cols; x++) {
       let r = noise(yoff, xoff, zoff) * 255;
 
-      let c = new Color(r);
-
-      context.fillStyle = c.toCSS();
+      context.fillStyle = _greyMap.get(Math.floor(r));
       context.fillRect(
         x * config.SCALE,
         y * config.SCALE,
