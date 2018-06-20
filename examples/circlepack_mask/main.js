@@ -254,20 +254,13 @@ const keypress = function(event) {
 };
 
 window.onload = function() {
-  let r;
-  let p = new Promise(function(resolve, reject) {
-    r = resolve;
-  });
-
-  meshjs.init(config, init, draw, p);
-  meshjs.listen(keypress);
-
   loadPixelDataFromPathWithBounds(
     config.TEMPLATE,
     function(pd) {
       originalPixels = pd.filter(Color.BLACK);
-      r(); //tell mesh js we are ready
+      meshjs.init(config, init, draw);
+      meshjs.listen(keypress);
     },
-    meshjs.bounds
+    new Rectangle(0, 0, config.RENDER_WIDTH, config.RENDER_HEIGHT)
   );
 };

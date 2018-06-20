@@ -56,6 +56,9 @@ let mousePosition = new Vector();
 const init = function(context) {
   bounds = meshjs.bounds;
   _context = context;
+
+  _context.strokeStyle = config.STROKE_COLOR;
+  _context.lineWidth = config.STROKE_WIDTH;
 };
 
 const draw = function(context, frameCount) {
@@ -71,7 +74,6 @@ const branch = function(len) {
   if (len < 4) {
     return;
   }
-
   drawLine(new Vector(0, 0), new Vector(0, -len));
   _context.translate(0, -len);
 
@@ -88,8 +90,6 @@ const branch = function(len) {
 
 const drawLine = function(start, end) {
   _context.beginPath();
-  _context.strokeStyle = "#FFFFFF";
-  _context.lineWidth = config.STROKE_WIDTH;
   _context.moveTo(start.x, start.y);
   _context.lineTo(end.x, end.y);
   _context.stroke();
