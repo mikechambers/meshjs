@@ -65,7 +65,8 @@ draw(context) {
 ```
 
 Classes that can draw themselves should implement the following as appropriate
-(consider this similar to an isDrawable Interface):
+(there is a base class called Drawable in the geometry folder which implements
+these apis and can be used as a base class):
 
 - **lineWidth** property : specifies the width of the stroke line (passed on to
   context.lineWidth)
@@ -84,15 +85,15 @@ printed to the console when the project starts.
 The following keyboard shortcuts are built in (currently no way to disable via
 API).
 
-|      Key(s) | Function                                              |
-| ----------: | :---------------------------------------------------- |
-|     SHIFT-P | Download PNG                                          |
+|      Key(s) | Function                                               |
+| ----------: | :----------------------------------------------------- |
+|     SHIFT-P | Download PNG                                           |
 |     SHIFT-V | Download Video (if enabled via _config.CAPTURE_VIDEO_) |
-|     SHIFT-J | Download Settings as a JSON file                      |
-| SHIFT-SPACE | Pause / Resume                                        |
-|     SHIFT-R | Pause / Resume Rendering                              |
-|     SHIFT-I | Rerun init()                                          |
-|     SHIFT-F | Run in Fullscreen                                     |
+|     SHIFT-J | Download Settings as a JSON file                       |
+| SHIFT-SPACE | Pause / Resume                                         |
+|     SHIFT-R | Pause / Resume Rendering                               |
+|     SHIFT-I | Rerun init()                                           |
+|     SHIFT-F | Run in Fullscreen                                      |
 
 In addition, you can define your own key combinations in the config, which will
 then automatically be included in the console print out.
@@ -116,7 +117,7 @@ First and foremost, you can listen for any events
 [broadcast in the browser](https://developer.mozilla.org/en-US/docs/Web/Events)
 using addEventListner.
 
-In addition _meshjs_ also emits a number of commonly used event, and where
+In addition _meshjs_ also emits a number of commonly used events, and where
 useful, normalizes the data to make it easier to work with.
 
 The following events are supported
