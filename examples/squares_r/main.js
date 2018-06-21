@@ -9,6 +9,7 @@
 
 import meshjs from "../../lib/mesh.js";
 import Rectangle from "../../lib/geometry/rectangle.js";
+import RoundedRectangle from "../../lib/geometry/roundedrectangle.js";
 import * as math from "../../lib/math/math.js";
 
 /************ CONFIG **************/
@@ -35,10 +36,11 @@ let config = {
   CAPTURE_VIDEO: false,
   ANIMATE: false,
 
-  RECT_COUNT: 500,
+  RECT_COUNT: 1000,
   PADDING: 20,
   RECT_BOUNDS_MIN: 20,
-  RECT_BOUNDS_MAX: 100
+  RECT_BOUNDS_MAX: 100,
+  CORNER_RADIUS: 8
 };
 
 let bounds;
@@ -69,14 +71,14 @@ const init = function(context) {
       continue;
     }
 
-    let r = new Rectangle(position, w, h);
+    let r = new RoundedRectangle(position, w, h, config.CORNER_RADIUS);
     rectangles.push(r);
   }
 };
 
 //called once per frame (if config.ANIMATE is true)
 const draw = function(context, frameCount) {
-  padded.draw(context);
+  //padded.draw(context);
   for (let r of rectangles) {
     r.draw(context);
   }
