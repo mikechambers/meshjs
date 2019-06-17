@@ -58,52 +58,60 @@ const draw = function(context, frameCount) {
   let colOffset = (config.RENDER_WIDTH - ((cols * (SIDE_DIMENSION + PADDING))) + PADDING) / 2;
   let rowOffset = (config.RENDER_HEIGHT - ((cols * (SIDE_DIMENSION + PADDING))) + PADDING) / 2;
 
-	let count = 0;
+  let count = 0;
   for (let c = 0; c < cols; c++) {
     for (let r = 0; r < rows; r++) {
 
-			let s = getShape(
-				((SIDE_DIMENSION + PADDING) * c) + colOffset,
-				((SIDE_DIMENSION + PADDING) * r) + rowOffset,
-				SIDE_DIMENSION,
-				SIDE_DIMENSION
-			);;
+      let s = getShape(
+        ((SIDE_DIMENSION + PADDING) * c) + colOffset,
+        ((SIDE_DIMENSION + PADDING) * r) + rowOffset,
+        SIDE_DIMENSION,
+        SIDE_DIMENSION
+      );
+
+      let s2 = getShape(
+        ((SIDE_DIMENSION + PADDING) * c) + colOffset,
+        ((SIDE_DIMENSION + PADDING) * r) + rowOffset,
+        SIDE_DIMENSION,
+        SIDE_DIMENSION
+      );
 
 
       s.draw(context);
+      s2.draw(context);
     }
   }
 };
 
 const getShape = function(x, y, width, height) {
-	let s;
+  let s;
 
 
-	let mod = 1;
-	if(Math.random() > 0.5) {
-		x = x + (width - width / 2) / 2;
-		y = y + (height - height / 2) / 2;
-		width = width / 2;
-		height = height / 2;
+  let mod = 1;
+  if (Math.random() > 0.5) {
+    x = x + (width - width / 2) / 2;
+    y = y + (height - height / 2) / 2;
+    width = width / 2;
+    height = height / 2;
 
-	}
-	if(Math.random() > 0.5) {
-		s = new Rectangle(x, y, width, height);
-	} else {
-		s = new Circle(x + width / 2, y + height / 2, width / 2);
-	}
+  }
+  if (Math.random() > 0.5) {
+    s = new Rectangle(x, y, width, height);
+  } else {
+    s = new Circle(x + width / 2, y + height / 2, width / 2);
+  }
 
 
-	let fill = Color.WHITE;
-	if(Math.random() > 0.5) {
-		fill = Color.BLACK;
-	}
+  let fill = Color.WHITE;
+  if (Math.random() > 0.5) {
+    fill = Color.BLACK;
+  }
 
-	s.fillColor = fill;
-	s.strokeColor = Color.BLACK;
+  s.fillColor = fill;
+  s.strokeColor = Color.BLACK;
 
-	return s;
-}
+  return s;
+};
 
 window.onload = function() {
   meshjs.init(config, init, draw);
