@@ -169,6 +169,14 @@ mesh.listen(click, false);
 You can find a template for getting started in the `template` folder. Just add
 code your code to the `init()` and `draw()` methods.
 
+### Video Output
+
+Note, the video is output at H264 within a webm container. You can convert this to MP4 using (FFMPEG)[https://ffmpeg.org/] with the following command:
+
+```
+ffmpeg -i video.webm -c:v copy video.mp4
+```
+
 ### License
 
 Copyright 2018 Mike Chambers
