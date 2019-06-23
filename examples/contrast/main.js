@@ -38,7 +38,7 @@ let config = {
   CAPTURE_VIDEO: false,
   ANIMATE: false,
   TEMPLATE: "radial.png",
-  COUNT: 40000,
+  COUNT: 4000,
   MAX_RADIUS: 40
 };
 
