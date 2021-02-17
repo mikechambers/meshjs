@@ -181,4 +181,4 @@ ffmpeg -i video.webm -c:v copy video.mp4
 
 Copyright 2018 Mike Chambers
 
-Released under and MIT License
+Released under a MIT License
